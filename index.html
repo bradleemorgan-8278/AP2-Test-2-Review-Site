@@ -48,8 +48,11 @@ h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; text-wrap: balanc
 .chip b { color: var(--hema); }
 .tabs { display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; scrollbar-width: none; }
 .tabs::-webkit-scrollbar { display: none; }
+.tabs.more-r { -webkit-mask-image: linear-gradient(to right, #000 80%, transparent); mask-image: linear-gradient(to right, #000 80%, transparent); }
+.tabs.more-l { -webkit-mask-image: linear-gradient(to left, #000 80%, transparent); mask-image: linear-gradient(to left, #000 80%, transparent); }
+.tabs.more-l.more-r { -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent); mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent); }
 .tab { flex: 0 0 auto; border: 1px solid transparent; background: transparent; border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .93rem; color: var(--muted); }
-.tab:hover { color: var(--ink); background: var(--paper); }
+@media (hover: hover) { .tab:hover { color: var(--ink); background: var(--paper); } }
 .tab[aria-selected="true"] { color: var(--hema); background: var(--hema-soft); border-color: var(--hema-soft); }
 .tab .n { font-family: var(--f-mono); font-size: .72rem; margin-left: 4px; background: var(--eosin); color: var(--card); border-radius: 999px; padding: 1px 6px; }
 
@@ -61,7 +64,7 @@ main.wrap { padding-block: 18px 60px; }
 
 .panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
 .btn { border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 8px 14px; font-weight: 700; }
-.btn:hover { border-color: var(--hema); }
+@media (hover: hover) { .btn:hover { border-color: var(--hema); } }
 .btn.primary { background: var(--hema); color: var(--card); border-color: var(--hema); }
 .btn.ghost { background: transparent; }
 .btn:disabled { opacity: .45; cursor: default; }
@@ -80,8 +83,8 @@ label.tog { display: inline-flex; align-items: center; gap: 6px; font-size: .9re
 .stage-title { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; padding: 2px 4px 8px; }
 .stage-title h3 { font-size: 1.05rem; }
 .stage-title .meta { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); }
-.canvas { position: relative; background: #ffffff; border-radius: 8px; overflow: hidden; }
-.canvas img { display: block; width: 100%; height: auto; }
+.canvas { position: relative; background: #ffffff; border-radius: 8px; }
+.canvas img { display: block; width: 100%; height: auto; border-radius: 8px; }
 .pin { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; border: 2px solid #ffffff; background: #8a8496; color: #ffffff; font: 700 11px/22px var(--f-mono); text-align: center; padding: 0; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
 .pin.cur { background: #c4406b; -webkit-animation: pulse 1.4s ease-in-out infinite; animation: pulse 1.4s ease-in-out infinite; z-index: 3; width: 30px; height: 30px; margin: -15px 0 0 -15px; line-height: 26px; font-size: 12px; }
 .pin.right { background: #1d7a4d; }
@@ -96,7 +99,7 @@ label.tog { display: inline-flex; align-items: center; gap: 6px; font-size: .9re
 .ask .qline em { font-style: normal; color: var(--eosin); }
 .choices { display: grid; gap: 8px; }
 .choice { text-align: left; border: 1px solid var(--line); background: var(--card); border-radius: 9px; padding: 10px 12px; font-size: .97rem; line-height: 1.3; }
-.choice:hover:not(:disabled) { border-color: var(--hema); background: var(--hema-soft); }
+@media (hover: hover) { .choice:hover:not(:disabled) { border-color: var(--hema); background: var(--hema-soft); } }
 .choice.right { border-color: var(--ok); background: var(--ok-soft); }
 .choice.wrong { border-color: var(--bad); background: var(--bad-soft); }
 .choice:disabled { cursor: default; }
@@ -199,6 +202,15 @@ table.vt th { font-family: var(--f-mono); font-size: .72rem; text-transform: upp
   .brand { padding-block: 8px 4px; }
   .brand h1 { font-size: 1.1rem; }
   .flash .front { font-size: 1.25rem; }
+  .fig-tools .pick { flex-basis: 100%; }
+  .qcard, .flash { padding: 16px; }
+}
+@media (pointer: coarse) {
+  button, select, summary, .hide-cell { touch-action: manipulation; }
+  .btn, .seg button, .tab, .choice, .deck-list button, .chain button, select.pick, .typebox input { min-height: 44px; }
+  .pm button { width: 44px; height: 40px; }
+  label.tog { min-height: 44px; }
+  label.tog input { width: 20px; height: 20px; }
 }
 </style>
 
@@ -289,6 +301,7 @@ function route() {
   var h = (location.hash || "").replace("#", "");
   if (!VIEWS[h]) h = "figures";
   Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) { t.setAttribute("aria-selected", t.dataset.view === h ? "true" : "false"); });
+  showActiveTab();
   main.innerHTML = "";
   VIEWS[h]();
   try { localStorage.setItem("labex2-view", h); } catch (e) {}
@@ -297,6 +310,25 @@ Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) {
   t.addEventListener("click", function () { if (location.hash === "#" + t.dataset.view) route(); else location.hash = t.dataset.view; });
 });
 window.addEventListener("hashchange", route);
+
+/* On narrow screens the tab row scrolls: keep the active tab in view and fade the edge that has more tabs. */
+var tabBar = document.querySelector(".tabs");
+function tabEdges() {
+  var max = tabBar.scrollWidth - tabBar.clientWidth;
+  tabBar.classList.toggle("more-l", tabBar.scrollLeft > 2);
+  tabBar.classList.toggle("more-r", tabBar.scrollLeft < max - 2);
+}
+function showActiveTab() {
+  var t = tabBar.querySelector('[aria-selected="true"]');
+  if (t) {
+    var left = t.offsetLeft - tabBar.offsetLeft, right = left + t.offsetWidth;
+    if (left < tabBar.scrollLeft + 24) tabBar.scrollLeft = Math.max(0, left - 24);
+    else if (right > tabBar.scrollLeft + tabBar.clientWidth - 24) tabBar.scrollLeft = right - tabBar.clientWidth + 24;
+  }
+  tabEdges();
+}
+tabBar.addEventListener("scroll", tabEdges, { passive: true });
+window.addEventListener("resize", tabEdges);
 
 /* =========================================================
    FIGURES
