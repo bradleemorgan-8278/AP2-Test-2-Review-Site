@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>A&amp;P2 Test 2 Review</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one sticky header with section tabs; each section is a work area (stage on top, controls beside or below). Palette borrows H&E stain: hematoxylin purple + eosin pink on slide-glass white. */
+:root {
+  --paper: #f6f5f9; --card: #ffffff; --ink: #1f1a2b; --muted: #645e73; --line: #dcd8e5;
+  --hema: #4b3a8f; --hema-soft: #ebe7f8; --eosin: #c4406b; --eosin-soft: #fbe6ee;
+  --ok: #1d7a4d; --ok-soft: #e1f3e9; --bad: #b3261e; --bad-soft: #fbe5e3; --warn: #9a6400; --warn-soft: #fbf0d9;
+  --shadow: 0 1px 2px rgba(31,26,43,.06), 0 4px 14px rgba(31,26,43,.06);
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #13111a; --card: #1c1926; --ink: #ece9f4; --muted: #a8a1b8; --line: #2e2a3b;
+  --hema: #a99cf2; --hema-soft: #2a2442; --eosin: #f27ba1; --eosin-soft: #3a1f2b;
+  --ok: #62cf95; --ok-soft: #173326; --bad: #ff8b80; --bad-soft: #3b1d1b; --warn: #f0c060; --warn-soft: #3a2f14;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25); color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --paper: #13111a; --card: #1c1926; --ink: #ece9f4; --muted: #a8a1b8; --line: #2e2a3b;
+  --hema: #a99cf2; --hema-soft: #2a2442; --eosin: #f27ba1; --eosin-soft: #3a1f2b;
+  --ok: #62cf95; --ok-soft: #173326; --bad: #ff8b80; --bad-soft: #3b1d1b; --warn: #f0c060; --warn-soft: #3a2f14;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25); color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.45; -webkit-text-size-adjust: 100%; }
+body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--card); }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--hema); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.15; text-wrap: balance; margin: 0; }
+
+.top { position: -webkit-sticky; position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--card); border-bottom: 1px solid var(--line); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 10px 6px; flex-wrap: wrap; }
+.brand h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: -.01em; }
+.brand h1 span { color: var(--eosin); }
+.stats { display: flex; gap: 8px; flex-wrap: wrap; font-family: var(--f-mono); font-size: .78rem; }
+.chip { border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; background: var(--paper); white-space: nowrap; }
+.chip b { color: var(--hema); }
+.tabs { display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { flex: 0 0 auto; border: 1px solid transparent; background: transparent; border-radius: 8px; padding: 7px 12px; font-weight: 700; font-size: .93rem; color: var(--muted); }
+.tab:hover { color: var(--ink); background: var(--paper); }
+.tab[aria-selected="true"] { color: var(--hema); background: var(--hema-soft); border-color: var(--hema-soft); }
+.tab .n { font-family: var(--f-mono); font-size: .72rem; margin-left: 4px; background: var(--eosin); color: var(--card); border-radius: 999px; padding: 1px 6px; }
+
+main.wrap { padding-block: 18px 60px; }
+.view-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.view-head h2 { font-size: 1.6rem; font-weight: 800; }
+.view-head p { margin: 4px 0 0; color: var(--muted); max-width: 62ch; }
+.eyebrow { font-family: var(--f-mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--eosin); }
+
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow); }
+.btn { border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 8px 14px; font-weight: 700; }
+.btn:hover { border-color: var(--hema); }
+.btn.primary { background: var(--hema); color: var(--card); border-color: var(--hema); }
+.btn.ghost { background: transparent; }
+.btn:disabled { opacity: .45; cursor: default; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; background: var(--card); }
+.seg button { border: 0; background: transparent; padding: 7px 12px; font-weight: 700; font-size: .9rem; color: var(--muted); }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--hema-soft); color: var(--hema); }
+select.pick { border: 1px solid var(--line); background: var(--card); border-radius: 8px; padding: 8px 10px; max-width: 100%; min-width: 0; }
+label.tog { display: inline-flex; align-items: center; gap: 6px; font-size: .9rem; color: var(--muted); }
+
+/* Figures */
+.fig-layout { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.fig-tools { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+.fig-tools .pick { flex: 1 1 260px; }
+.stage { padding: 10px; }
+.stage-title { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; flex-wrap: wrap; padding: 2px 4px 8px; }
+.stage-title h3 { font-size: 1.05rem; }
+.stage-title .meta { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); }
+.canvas { position: relative; background: #ffffff; border-radius: 8px; overflow: hidden; }
+.canvas img { display: block; width: 100%; height: auto; }
+.pin { position: absolute; width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%; border: 2px solid #ffffff; background: #8a8496; color: #ffffff; font: 700 11px/22px var(--f-mono); text-align: center; padding: 0; box-shadow: 0 1px 3px rgba(0,0,0,.35); }
+.pin.cur { background: #c4406b; -webkit-animation: pulse 1.4s ease-in-out infinite; animation: pulse 1.4s ease-in-out infinite; z-index: 3; width: 30px; height: 30px; margin: -15px 0 0 -15px; line-height: 26px; font-size: 12px; }
+.pin.right { background: #1d7a4d; }
+.pin.wrong { background: #b3261e; }
+.pin.study { background: #4b3a8f; }
+@-webkit-keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(196,64,107,.55); } 50% { box-shadow: 0 0 0 9px rgba(196,64,107,0); } }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(196,64,107,.55); } 50% { box-shadow: 0 0 0 9px rgba(196,64,107,0); } }
+@media (prefers-reduced-motion: reduce) { .pin.cur { -webkit-animation: none; animation: none; } }
+.tip { position: absolute; z-index: 5; background: #1f1a2b; color: #ffffff; font-size: .82rem; line-height: 1.3; padding: 6px 9px; border-radius: 6px; max-width: 220px; pointer-events: none; -webkit-transform: translate(-50%, -100%); transform: translate(-50%, -100%); margin-top: -18px; box-shadow: 0 3px 10px rgba(0,0,0,.3); }
+.ask { padding: 16px; display: flex; flex-direction: column; gap: 12px; position: -webkit-sticky; position: sticky; top: 120px; }
+.ask .qline { font-family: var(--f-display); font-size: 1.25rem; font-weight: 800; }
+.ask .qline em { font-style: normal; color: var(--eosin); }
+.choices { display: grid; gap: 8px; }
+.choice { text-align: left; border: 1px solid var(--line); background: var(--card); border-radius: 9px; padding: 10px 12px; font-size: .97rem; line-height: 1.3; }
+.choice:hover:not(:disabled) { border-color: var(--hema); background: var(--hema-soft); }
+.choice.right { border-color: var(--ok); background: var(--ok-soft); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.choice:disabled { cursor: default; }
+.typebox { display: flex; gap: 8px; }
+.typebox input { flex: 1; min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 9px 11px; background: var(--paper); }
+.fb { border-radius: 9px; padding: 10px 12px; font-size: .95rem; }
+.fb.ok { background: var(--ok-soft); color: var(--ok); }
+.fb.no { background: var(--bad-soft); color: var(--bad); }
+.fb.close { background: var(--warn-soft); color: var(--warn); }
+.fb b { color: var(--ink); }
+.progress { height: 6px; background: var(--paper); border-radius: 999px; overflow: hidden; border: 1px solid var(--line); }
+.progress i { display: block; height: 100%; background: var(--hema); width: 0; -webkit-transition: width .25s; transition: width .25s; }
+.small { font-size: .85rem; color: var(--muted); }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.tagq { font-family: var(--f-mono); font-size: .7rem; color: var(--ok); font-weight: 700; }
+.legend { display: flex; gap: 12px; flex-wrap: wrap; font-size: .8rem; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; background: var(--c); }
+
+/* Histology */
+.histo-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; align-items: start; }
+.scope { position: relative; border-radius: 50%; overflow: hidden; width: 100%; max-width: 460px; margin: 0 auto; border: 10px solid var(--ink); box-shadow: inset 0 0 40px rgba(0,0,0,.35), var(--shadow); background: #ffffff; }
+.scope::after { content: ""; display: block; padding-bottom: 100%; }
+.scope img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.scope-wrap { padding: 16px; }
+.organs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+details.feat { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 0; }
+details.feat summary { cursor: pointer; padding: 12px 14px; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 8px; }
+details.feat summary::-webkit-details-marker { display: none; }
+details.feat summary::after { content: "+"; font-family: var(--f-mono); color: var(--hema); }
+details.feat[open] summary::after { content: "\2212"; }
+details.feat dl { margin: 0; padding: 0 14px 14px; display: grid; gap: 6px; font-size: .92rem; }
+details.feat dt { font-family: var(--f-mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--eosin); margin-top: 4px; }
+details.feat dd { margin: 0; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+.gallery figure { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.gallery img { display: block; width: 100%; background: #ffffff; }
+.gallery figcaption { padding: 8px 10px; font-size: .85rem; font-weight: 700; }
+.section-label { margin: 28px 0 10px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.section-label h3 { font-size: 1.15rem; }
+
+/* Experiment */
+.tubes { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 12px; }
+.tube { padding: 12px; display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 10px; align-items: start; }
+.tube h4 { margin: 0; font-family: var(--f-mono); font-size: 1rem; color: var(--hema); }
+.tube .what { font-size: .9rem; margin: 2px 0 6px; }
+.tube .temp { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); }
+.pm { display: flex; gap: 6px; align-items: center; margin-top: 6px; flex-wrap: wrap; font-size: .82rem; }
+.pm .lab { width: 74px; color: var(--muted); }
+.pm button { border: 1px solid var(--line); background: var(--card); border-radius: 6px; width: 36px; height: 30px; font-family: var(--f-mono); font-weight: 700; }
+.pm button[aria-pressed="true"] { background: var(--hema); border-color: var(--hema); color: var(--card); }
+.pm button.right { background: var(--ok); border-color: var(--ok); color: var(--card); }
+.pm button.wrong { background: var(--bad); border-color: var(--bad); color: var(--card); }
+.why { font-size: .82rem; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); color: var(--muted); }
+.why b { color: var(--ink); }
+.subtabs { margin-bottom: 12px; }
+table.vt { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.tablebox { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table.vt th, table.vt td { border-bottom: 1px solid var(--line); padding: 8px; text-align: left; vertical-align: top; }
+table.vt th { font-family: var(--f-mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.hide-cell { background: var(--hema-soft); color: transparent; border-radius: 6px; cursor: pointer; user-select: none; -webkit-user-select: none; }
+.hide-cell::after { content: "Tap to show"; color: var(--hema); font-family: var(--f-mono); font-size: .72rem; }
+.hide-cell.shown { background: transparent; color: var(--ink); cursor: default; }
+.hide-cell.shown::after { content: none; }
+
+/* Quiz + cards */
+.qcard { padding: 20px; max-width: 760px; }
+.qcard .src { font-family: var(--f-mono); font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.qcard .qtext { font-size: 1.15rem; font-weight: 700; margin: 6px 0 12px; }
+.qcard img { display: block; max-width: 100%; max-height: 360px; border-radius: 8px; border: 1px solid var(--line); margin-bottom: 12px; }
+.reveal { background: var(--hema-soft); border-radius: 9px; padding: 12px; }
+.flash { padding: 24px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; gap: 14px; max-width: 760px; cursor: pointer; }
+.flash .front { font-family: var(--f-display); font-size: 1.5rem; font-weight: 800; }
+.flash .back { font-size: 1.05rem; border-top: 1px solid var(--line); padding-top: 14px; }
+.deck-list { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.deck-list button { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: 6px 12px; font-size: .88rem; font-weight: 700; color: var(--muted); }
+.deck-list button[aria-pressed="true"] { border-color: var(--hema); color: var(--hema); background: var(--hema-soft); }
+.chain { display: flex; flex-wrap: wrap; gap: 6px; }
+.chain button { border: 1px dashed var(--line); background: var(--card); border-radius: 8px; padding: 6px 10px; font-size: .88rem; }
+.chain .slot { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font-size: .88rem; background: var(--paper); min-width: 40px; }
+.chain .slot.ok { border-color: var(--ok); background: var(--ok-soft); }
+.chain .slot.no { border-color: var(--bad); background: var(--bad-soft); }
+
+/* Review */
+.miss { display: grid; gap: 8px; }
+.miss .it { padding: 10px 12px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: center; }
+.miss .it .k { font-family: var(--f-mono); font-size: .7rem; color: var(--eosin); text-transform: uppercase; }
+.empty { padding: 28px; text-align: center; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .fig-layout, .histo-layout { grid-template-columns: minmax(0, 1fr); }
+  .ask { position: static; }
+}
+@media (max-width: 480px) {
+  .view-head h2 { font-size: 1.35rem; }
+  .pin { width: 22px; height: 22px; margin: -11px 0 0 -11px; line-height: 18px; font-size: 10px; }
+  .pin.cur { width: 26px; height: 26px; margin: -13px 0 0 -13px; line-height: 22px; }
+  .organs { grid-template-columns: 1fr; }
+  .chip.exam { display: none; }
+  .brand { padding-block: 8px 4px; }
+  .brand h1 { font-size: 1.1rem; }
+  .flash .front { font-size: 1.25rem; }
+}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brand">
+      <h1>A&amp;P2 Test 2 <span>Review</span></h1>
+      <div class="stats" aria-live="polite">
+        <span class="chip">Session <b id="s-score">0/0</b></span>
+        <span class="chip">To review <b id="s-miss">0</b></span>
+        <span class="chip exam">Exam Thu Oct 29</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Study sections">
+      <button class="tab" role="tab" data-view="figures">Figures</button>
+      <button class="tab" role="tab" data-view="histology">Histology</button>
+      <button class="tab" role="tab" data-view="experiment">Ex 39 experiment</button>
+      <button class="tab" role="tab" data-view="quiz">Quiz bank</button>
+      <button class="tab" role="tab" data-view="cards">Flashcards</button>
+      <button class="tab" role="tab" data-view="review">Review missed<span class="n" id="tab-miss" hidden>0</span></button>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="main"></main>
+
+<script>window.DATA={"figs": [{"id": "ex_36-01", "num": 1, "sec": "Respiratory anatomy", "title": "Fig 36.1a Upper respiratory tract (cadaver photo, midsagittal)", "w": 932, "h": 670, "pins": [{"x": 12.55, "y": 18.51, "t": "Nasal cavity", "tag": true, "q": false}, {"x": 11.37, "y": 36.12, "t": "Pharyngeal tonsils", "tag": true, "q": false}, {"x": 8.69, "y": 48.06, "t": "Nasopharynx", "tag": true, "q": false}, {"x": 14.91, "y": 57.31, "t": "Opening of pharyngotympanic tube", "tag": true, "q": false}, {"x": 17.17, "y": 71.49, "t": "Oropharynx", "tag": true, "q": false}, {"x": 97.1, "y": 14.33, "t": "Cribiform plate of ethmoid bone", "tag": true, "q": false}, {"x": 97.1, "y": 21.94, "t": "Superior nasal conchae", "tag": true, "q": false}, {"x": 97.1, "y": 34.93, "t": "Middle nasal concha", "tag": true, "q": false}, {"x": 97.0, "y": 49.1, "t": "Inferior nasal concha", "tag": true, "q": false}, {"x": 97.1, "y": 64.48, "t": "Hard palate", "tag": false, "q": false}, {"x": 97.21, "y": 72.84, "t": "Soft palate", "tag": false, "q": false}, {"x": 97.21, "y": 81.19, "t": "Uvula", "tag": true, "q": false}]}, {"id": "ex_36-02", "num": 2, "sec": "Respiratory anatomy", "title": "Fig 36.1b Regions of the pharynx", "w": 384, "h": 451, "pins": [{"x": 10.94, "y": 46.12, "t": "Nasopharynx", "tag": true, "q": true}, {"x": 6.77, "y": 55.43, "t": "Oropharynx", "tag": true, "q": true}, {"x": 18.75, "y": 64.08, "t": "Laryngopharynx", "tag": true, "q": true}]}, {"id": "ex_36-03", "num": 3, "sec": "Respiratory anatomy", "title": "Fig 36.1c Upper respiratory tract (midsagittal)", "w": 940, "h": 1061, "pins": [{"x": 19.15, "y": 2.45, "t": "Cribiform plate of ethmoid bone", "tag": true, "q": false}, {"x": 20.53, "y": 9.14, "t": "Sphenoid sinus", "tag": true, "q": false}, {"x": 18.09, "y": 13.29, "t": "Posterior nasal aperture (choanae)", "tag": false, "q": false}, {"x": 22.66, "y": 26.2, "t": "Pharyngeal tonsils", "tag": true, "q": false}, {"x": 15.74, "y": 29.78, "t": "Opening of pharyngotympanic tube", "tag": true, "q": false}, {"x": 9.89, "y": 38.55, "t": "Uvula", "tag": true, "q": false}, {"x": 18.94, "y": 49.67, "t": "Palatine tonsils", "tag": true, "q": false}, {"x": 19.04, "y": 53.72, "t": "Isthmus of the fauces (opening from the mouth into the oropharynx; if a question says region, think oropharynx)", "tag": false, "q": false}, {"x": 20.96, "y": 67.01, "t": "Laryngopharynx", "tag": true, "q": false}, {"x": 14.26, "y": 77.0, "t": "Esophagus", "tag": false, "q": false}, {"x": 10.64, "y": 90.1, "t": "Trachea", "tag": true, "q": false}, {"x": 95.53, "y": 5.28, "t": "Frontal sinus", "tag": true, "q": false}, {"x": 97.23, "y": 11.59, "t": "Superior / middle / inferior nasal conchae", "tag": true, "q": false}, {"x": 95.64, "y": 29.41, "t": "Nasal vestibule", "tag": false, "q": false}, {"x": 95.96, "y": 32.14, "t": "Nares (nostril)", "tag": false, "q": false}, {"x": 95.74, "y": 34.59, "t": "Hard palate", "tag": false, "q": false}, {"x": 95.74, "y": 41.75, "t": "Nasal meatuses (superior, middle, inferior)", "tag": false, "q": false}, {"x": 95.85, "y": 51.08, "t": "Soft palate", "tag": false, "q": false}, {"x": 95.85, "y": 57.12, "t": "Tongue", "tag": false, "q": false}, {"x": 95.85, "y": 62.68, "t": "Lingual tonsils", "tag": true, "q": false}, {"x": 95.74, "y": 67.01, "t": "Hyoid bone", "tag": true, "q": false}, {"x": 63.51, "y": 72.76, "t": "Epiglottis", "tag": true, "q": false}, {"x": 63.62, "y": 76.53, "t": "Vestibular folds", "tag": true, "q": false}, {"x": 63.51, "y": 80.11, "t": "Thyroid cartilage", "tag": true, "q": false}, {"x": 63.62, "y": 83.32, "t": "Vocal folds", "tag": true, "q": false}, {"x": 63.51, "y": 86.9, "t": "Cricoid cartilage", "tag": true, "q": false}, {"x": 61.91, "y": 92.93, "t": "Thyroid gland", "tag": false, "q": false}]}, {"id": "ex_36-05", "num": 4, "sec": "Respiratory anatomy", "title": "Fig 36.2a Larynx, anterior superficial view", "w": 906, "h": 932, "pins": [{"x": 15.12, "y": 18.45, "t": "Hyoid bone", "tag": true, "q": false}, {"x": 16.0, "y": 32.19, "t": "Thyroid cartilage", "tag": true, "q": false}, {"x": 18.54, "y": 43.13, "t": "Laryngeal prominence (Adam's apple)", "tag": false, "q": false}, {"x": 21.96, "y": 58.69, "t": "Cricothyroid ligament", "tag": false, "q": false}, {"x": 23.84, "y": 68.24, "t": "Cricotracheal ligament", "tag": false, "q": false}, {"x": 97.13, "y": 6.55, "t": "Epiglottis", "tag": true, "q": true}, {"x": 97.02, "y": 17.17, "t": "Thyrohyoid membrane", "tag": false, "q": false}, {"x": 88.52, "y": 61.37, "t": "Cricoid cartilage", "tag": true, "q": false}, {"x": 89.51, "y": 80.69, "t": "Tracheal cartilages", "tag": false, "q": false}]}, {"id": "ex_36-06", "num": 5, "sec": "Respiratory anatomy", "title": "Fig 36.2b Larynx, sagittal view (anterior to the right)", "w": 705, "h": 916, "pins": [{"x": 7.09, "y": 4.91, "t": "Epiglottis", "tag": true, "q": true}, {"x": 9.08, "y": 15.72, "t": "Thyrohyoid membrane", "tag": false, "q": false}, {"x": 16.88, "y": 29.15, "t": "Cuneiform cartilage", "tag": false, "q": false}, {"x": 19.15, "y": 37.55, "t": "Corniculate cartilage", "tag": false, "q": false}, {"x": 18.72, "y": 43.34, "t": "Arytenoid cartilage", "tag": false, "q": false}, {"x": 14.61, "y": 50.11, "t": "Arytenoid muscles", "tag": false, "q": false}, {"x": 12.91, "y": 60.92, "t": "Cricoid cartilage", "tag": true, "q": false}, {"x": 19.29, "y": 80.46, "t": "Tracheal cartilages", "tag": false, "q": false}, {"x": 96.17, "y": 13.32, "t": "Hyoid bone", "tag": true, "q": false}, {"x": 96.03, "y": 21.18, "t": "Thyrohyoid membrane", "tag": false, "q": false}, {"x": 96.31, "y": 28.38, "t": "Fatty pad", "tag": false, "q": false}, {"x": 96.03, "y": 34.83, "t": "Vestibular folds", "tag": true, "q": false}, {"x": 96.17, "y": 45.09, "t": "Thyroid cartilage", "tag": true, "q": false}, {"x": 96.03, "y": 51.2, "t": "Vocal folds", "tag": true, "q": false}, {"x": 96.03, "y": 61.9, "t": "Cricothyroid ligament", "tag": false, "q": false}, {"x": 96.17, "y": 67.36, "t": "Cricotracheal ligament", "tag": false, "q": false}]}, {"id": "ex_36-07", "num": 6, "sec": "Respiratory anatomy", "title": "Fig 36.3 Lower respiratory tract (bronchial tree and lobes)", "w": 924, "h": 972, "pins": [{"x": 30.19, "y": 87.04, "t": "R superior lobe", "tag": true, "q": false}, {"x": 25.54, "y": 92.28, "t": "R middle lobe", "tag": true, "q": false}, {"x": 16.02, "y": 97.33, "t": "R inferior lobe", "tag": true, "q": false}, {"x": 64.39, "y": 2.67, "t": "Trachea", "tag": true, "q": false}, {"x": 97.19, "y": 18.52, "t": "L superior lobe", "tag": true, "q": false}, {"x": 96.86, "y": 29.01, "t": "L Primary Bronchus", "tag": true, "q": false}, {"x": 96.97, "y": 43.72, "t": "Secondary bronchi", "tag": true, "q": false}, {"x": 96.97, "y": 57.61, "t": "Tertiary bronchi", "tag": true, "q": false}, {"x": 96.97, "y": 87.45, "t": "L inferior lobe", "tag": true, "q": false}]}, {"id": "ex_36-08", "num": 7, "sec": "Respiratory anatomy", "title": "Fig 36.3 Respiratory zone: bronchioles and alveoli", "w": 961, "h": 748, "pins": [{"x": 22.48, "y": 23.4, "t": "Alveolar duct", "tag": false, "q": true}, {"x": 20.19, "y": 41.58, "t": "Respiratory bronchioles", "tag": false, "q": true}, {"x": 32.05, "y": 82.09, "t": "Terminal bronchiole (bronchioles)", "tag": false, "q": false}, {"x": 86.16, "y": 11.23, "t": "alveoli", "tag": true, "q": false}, {"x": 71.28, "y": 91.58, "t": "Alveolar sac", "tag": false, "q": true}]}, {"id": "ex_36-09", "num": 8, "sec": "Respiratory anatomy", "title": "Fig 36.4a Alveoli and pulmonary capillaries (detail)", "w": 961, "h": 1047, "pins": [{"x": 10.72, "y": 81.95, "t": "alveoli", "tag": true, "q": false}, {"x": 34.76, "y": 82.04, "t": "Red blood cell (in capillary)", "tag": false, "q": false}, {"x": 57.34, "y": 82.23, "t": "Type II alveolar cell (surfactant-secreting)", "tag": false, "q": false}, {"x": 81.27, "y": 82.04, "t": "Nucleus of type I alveolar cell", "tag": false, "q": false}, {"x": 97.09, "y": 9.17, "t": "Type I alveolar cell (simple squamous epithelium)", "tag": false, "q": false}, {"x": 97.19, "y": 19.87, "t": "Alveolar pores", "tag": false, "q": false}, {"x": 97.19, "y": 32.57, "t": "Capillary", "tag": false, "q": false}, {"x": 97.09, "y": 48.62, "t": "Alveolar macrophage", "tag": false, "q": false}, {"x": 97.19, "y": 53.2, "t": "Endothelial cell nucleus (capillary wall)", "tag": false, "q": false}, {"x": 97.29, "y": 66.67, "t": "Respiratory membrane", "tag": false, "q": false}]}, {"id": "ex_36-10", "num": 9, "sec": "Respiratory anatomy", "title": "Fig 36.4b Respiratory membrane (alveolus-capillary)", "w": 748, "h": 1027, "pins": [{"x": 10.03, "y": 11.49, "t": "Nucleus of type I alveolar cell", "tag": false, "q": false}, {"x": 22.06, "y": 59.2, "t": "Endothelial cell nucleus", "tag": false, "q": false}, {"x": 3.48, "y": 73.81, "t": "Respiratory membrane (all three layers)", "tag": false, "q": false}, {"x": 80.48, "y": 2.53, "t": "Red blood cell in capillary", "tag": false, "q": false}, {"x": 50.0, "y": 68.74, "t": "Alveolar epithelium (simple squamous)", "tag": false, "q": false}, {"x": 67.78, "y": 74.29, "t": "Fused basement membranes", "tag": false, "q": false}, {"x": 54.55, "y": 86.66, "t": "Capillary endothelium", "tag": false, "q": false}]}, {"id": "ex_36-11", "num": 10, "sec": "Respiratory anatomy", "title": "Fig 36.5a Thoracic cavity organs, anterior view", "w": 1242, "h": 783, "pins": [{"x": 28.02, "y": 26.95, "t": "Trachea", "tag": true, "q": false}, {"x": 28.02, "y": 30.78, "t": "Thymus", "tag": false, "q": false}, {"x": 10.79, "y": 43.68, "t": "Apex of lung", "tag": false, "q": false}, {"x": 15.94, "y": 50.57, "t": "R superior lobe", "tag": true, "q": false}, {"x": 14.9, "y": 57.47, "t": "Horizontal fissure", "tag": true, "q": false}, {"x": 14.81, "y": 62.2, "t": "R middle lobe", "tag": true, "q": false}, {"x": 12.96, "y": 67.43, "t": "L/R oblique fissure (right lung)", "tag": true, "q": false}, {"x": 14.98, "y": 72.54, "t": "R inferior lobe", "tag": true, "q": false}, {"x": 5.56, "y": 77.91, "t": "Heart (in mediastinum)", "tag": false, "q": false}, {"x": 9.98, "y": 86.33, "t": "diaphragm", "tag": true, "q": false}, {"x": 48.95, "y": 89.91, "t": "Cardiac notch", "tag": true, "q": false}, {"x": 11.03, "y": 91.57, "t": "Base of lung", "tag": false, "q": false}, {"x": 97.91, "y": 21.84, "t": "Intercostal muscle", "tag": false, "q": false}, {"x": 97.75, "y": 27.84, "t": "Rib", "tag": false, "q": false}, {"x": 97.75, "y": 33.33, "t": "Parietal pleura", "tag": true, "q": true}, {"x": 97.75, "y": 36.78, "t": "Pleural cavity", "tag": false, "q": false}, {"x": 97.58, "y": 41.25, "t": "Visceral pleura", "tag": true, "q": false}, {"x": 63.04, "y": 62.32, "t": "L superior lobe", "tag": true, "q": false}, {"x": 62.88, "y": 71.14, "t": "L/R oblique fissure (left lung)", "tag": true, "q": false}, {"x": 62.8, "y": 79.31, "t": "L inferior lobe", "tag": true, "q": false}]}, {"id": "ex_36-12", "num": 11, "sec": "Respiratory anatomy", "title": "Fig 36.5c Thoracic cavity, transverse section (posterior at top)", "w": 1203, "h": 696, "pins": [{"x": 42.81, "y": 4.89, "t": "Vertebra", "tag": false, "q": false}, {"x": 9.48, "y": 23.99, "t": "Right lung", "tag": false, "q": false}, {"x": 13.05, "y": 32.76, "t": "Parietal pleura", "tag": true, "q": false}, {"x": 13.47, "y": 41.52, "t": "Pleural cavity", "tag": false, "q": false}, {"x": 12.3, "y": 50.43, "t": "Visceral pleura", "tag": true, "q": false}, {"x": 9.98, "y": 70.26, "t": "Pericardial membranes", "tag": false, "q": false}, {"x": 8.23, "y": 82.76, "t": "Sternum", "tag": false, "q": false}, {"x": 76.72, "y": 4.17, "t": "Esophagus (posterior mediastinum)", "tag": false, "q": false}, {"x": 97.76, "y": 15.37, "t": "Root of lung at hilum", "tag": false, "q": false}, {"x": 97.67, "y": 23.99, "t": "L Primary Bronchus", "tag": true, "q": false}, {"x": 97.84, "y": 29.17, "t": "Pulmonary arteries (L pulmonary artery)", "tag": true, "q": false}, {"x": 97.59, "y": 34.63, "t": "L pulmonary vein", "tag": false, "q": false}, {"x": 97.67, "y": 47.7, "t": "Left lung", "tag": false, "q": false}, {"x": 97.59, "y": 56.9, "t": "Thoracic wall", "tag": false, "q": false}, {"x": 97.67, "y": 65.09, "t": "Pulmonary trunk", "tag": false, "q": false}, {"x": 97.59, "y": 73.13, "t": "Heart (in mediastinum)", "tag": false, "q": false}, {"x": 97.67, "y": 80.03, "t": "Anterior mediastinum", "tag": false, "q": false}]}, {"id": "ex_13-1", "num": 12, "sec": "Respiratory muscles", "title": "Fig 13.6a Neck muscles (accessory muscles of inspiration)", "w": 668, "h": 566, "pins": [{"x": 8.83, "y": 26.5, "t": "sternocleidomastoid", "tag": true, "q": false}, {"x": 82.04, "y": 19.26, "t": "scalene muscles", "tag": true, "q": false}]}, {"id": "ex_13-2", "num": 13, "sec": "Respiratory muscles", "title": "Fig 13.7 Thorax and shoulder muscles (anterior view)", "w": 986, "h": 877, "pins": [{"x": 92.29, "y": 49.94, "t": "pectoralis minor", "tag": true, "q": false}, {"x": 92.29, "y": 67.84, "t": "serratus anterior", "tag": true, "q": true}]}, {"id": "ex_13-3", "num": 14, "sec": "Respiratory muscles", "title": "Fig 13.8a Deep thoracic muscles of respiration", "w": 1163, "h": 850, "pins": [{"x": 42.48, "y": 44.59, "t": "external intercostal muscles", "tag": true, "q": false}, {"x": 54.94, "y": 71.18, "t": "internal intercostal muscles", "tag": true, "q": false}]}, {"id": "ex_13-4", "num": 15, "sec": "Respiratory muscles", "title": "Fig 13.9a Anterolateral abdominal wall muscles", "w": 975, "h": 1047, "pins": [{"x": 9.44, "y": 43.27, "t": "transversus abdominis", "tag": true, "q": false}, {"x": 14.15, "y": 53.77, "t": "internal oblique", "tag": true, "q": false}, {"x": 15.08, "y": 64.47, "t": "external oblique", "tag": true, "q": false}]}, {"id": "ex_37-1", "num": 16, "sec": "Respiratory muscles", "title": "Intercostal muscles (identify each rib cage)", "w": 633, "h": 856, "pins": [{"x": 24.33, "y": 72.08, "t": "internal intercostal muscles", "tag": true, "q": false}, {"x": 77.25, "y": 72.08, "t": "external intercostal muscles", "tag": true, "q": false}]}, {"id": "ex_37-2", "num": 17, "sec": "Respiratory muscles", "title": "Muscles of the neck (accessory inspiration)", "w": 949, "h": 960, "pins": [{"x": 8.54, "y": 49.17, "t": "sternocleidomastoid", "tag": true, "q": false}, {"x": 82.82, "y": 43.65, "t": "scalene muscles", "tag": true, "q": false}]}, {"id": "ex_37-3", "num": 18, "sec": "Respiratory muscles", "title": "Muscles of thorax and shoulders, anterior view", "w": 1466, "h": 858, "pins": [{"x": 86.08, "y": 50.93, "t": "pectoralis minor", "tag": true, "q": false}, {"x": 86.97, "y": 63.87, "t": "serratus anterior", "tag": true, "q": true}]}, {"id": "ex_37-4", "num": 19, "sec": "Respiratory muscles", "title": "Muscles of the abdominal wall (forced expiration)", "w": 988, "h": 889, "pins": [{"x": 3.64, "y": 54.44, "t": "transversus abdominis", "tag": true, "q": false}, {"x": 3.54, "y": 60.29, "t": "internal oblique", "tag": true, "q": false}, {"x": 3.74, "y": 68.5, "t": "external oblique", "tag": true, "q": false}, {"x": 90.79, "y": 40.94, "t": "rectus abdominis", "tag": true, "q": false}]}, {"id": "ex_37-5", "num": 20, "sec": "Volumes and capacities", "title": "Fig 37.2a Respiratory volumes and capacities (spirogram, male)", "w": 1263, "h": 561, "pins": [{"x": 41.25, "y": 24.6, "t": "Inspiratory reserve volume (IRV) 3100 ml", "tag": false, "q": true}, {"x": 41.25, "y": 50.8, "t": "Tidal volume (TV) 500 ml", "tag": false, "q": true}, {"x": 41.25, "y": 63.1, "t": "Expiratory reserve volume (ERV) 1200 ml", "tag": false, "q": true}, {"x": 41.25, "y": 80.93, "t": "Residual volume (RV) 1200 ml", "tag": false, "q": true}, {"x": 60.57, "y": 28.7, "t": "Inspiratory capacity (IC = TV + IRV) 3600 ml", "tag": false, "q": false}, {"x": 60.57, "y": 72.19, "t": "Functional residual capacity (FRC = ERV + RV) 2400 ml", "tag": false, "q": false}, {"x": 76.01, "y": 37.61, "t": "Vital capacity (VC = TV + IRV + ERV) 4800 ml", "tag": false, "q": true}, {"x": 91.45, "y": 37.61, "t": "Total lung capacity (TLC = all four volumes) 6000 ml", "tag": false, "q": false}]}, {"id": "ex_37-6", "num": 21, "sec": "Volumes and capacities", "title": "Fig 37.2b Summary of respiratory volumes and capacities", "w": 1416, "h": 667, "pins": [{"x": 9.75, "y": 28.04, "t": "Respiratory volumes (bracket)", "tag": false, "q": false}, {"x": 10.17, "y": 71.51, "t": "Respiratory capacities (bracket)", "tag": false, "q": false}, {"x": 21.75, "y": 13.79, "t": "Tidal volume (TV)", "tag": false, "q": false}, {"x": 21.75, "y": 23.69, "t": "Inspiratory reserve volume (IRV)", "tag": false, "q": false}, {"x": 21.75, "y": 33.28, "t": "Expiratory reserve volume (ERV)", "tag": false, "q": false}, {"x": 21.75, "y": 43.03, "t": "Residual volume (RV)", "tag": false, "q": false}, {"x": 21.75, "y": 57.57, "t": "Total lung capacity (TLC)", "tag": false, "q": false}, {"x": 21.75, "y": 67.32, "t": "Vital capacity (VC)", "tag": false, "q": false}, {"x": 21.75, "y": 76.91, "t": "Inspiratory capacity (IC)", "tag": false, "q": false}, {"x": 21.75, "y": 86.51, "t": "Functional residual capacity (FRC)", "tag": false, "q": false}]}, {"id": "ex_37-7", "num": 22, "sec": "Volumes and capacities", "title": "Fig 37.7 Computer-generated spirogram (identify each arrow)", "w": 1416, "h": 912, "pins": [{"x": 17.51, "y": 58.22, "t": "Total lung capacity (TLC)", "tag": false, "q": false}, {"x": 28.88, "y": 25.88, "t": "Inspiratory reserve volume (IRV)", "tag": false, "q": false}, {"x": 27.12, "y": 41.45, "t": "Tidal volume (TV)", "tag": false, "q": false}, {"x": 39.9, "y": 51.1, "t": "Expiratory reserve volume (ERV)", "tag": false, "q": false}, {"x": 44.07, "y": 32.46, "t": "Vital capacity (VC)", "tag": false, "q": false}, {"x": 50.99, "y": 48.36, "t": "TV + ERV (top of a normal breath down to maximal exhale; rarely asked)", "tag": false, "q": false}, {"x": 69.14, "y": 27.52, "t": "Inspiratory capacity (IC)", "tag": false, "q": false}, {"x": 69.14, "y": 52.19, "t": "Functional residual capacity (FRC)", "tag": false, "q": false}, {"x": 79.52, "y": 66.67, "t": "Residual volume (RV)", "tag": false, "q": false}]}, {"id": "ex_38-01", "num": 23, "sec": "Digestive anatomy", "title": "Fig 38.1 Digestive system overview", "w": 854, "h": 1050, "pins": [{"x": 30.8, "y": 19.33, "t": "Mouth (oral cavity)", "tag": false, "q": false}, {"x": 20.49, "y": 23.33, "t": "Tongue", "tag": true, "q": false}, {"x": 8.78, "y": 42.1, "t": "Esophagus", "tag": true, "q": false}, {"x": 3.51, "y": 57.33, "t": "Liver", "tag": true, "q": false}, {"x": 9.37, "y": 62.19, "t": "Gall bladder", "tag": true, "q": false}, {"x": 11.83, "y": 76.29, "t": "Small intestine", "tag": true, "q": false}, {"x": 29.16, "y": 73.14, "t": "duodenum", "tag": true, "q": false}, {"x": 27.17, "y": 76.38, "t": "jejunum", "tag": true, "q": false}, {"x": 24.12, "y": 79.43, "t": "ileum", "tag": true, "q": false}, {"x": 3.04, "y": 97.52, "t": "anus", "tag": true, "q": false}, {"x": 76.81, "y": 18.95, "t": "parotid glands", "tag": true, "q": false}, {"x": 76.7, "y": 22.1, "t": "sublingual glands", "tag": true, "q": false}, {"x": 76.7, "y": 25.05, "t": "submandibular glands", "tag": true, "q": false}, {"x": 96.84, "y": 23.24, "t": "Salivary glands", "tag": true, "q": false}, {"x": 96.96, "y": 40.95, "t": "Pharynx", "tag": false, "q": false}, {"x": 96.84, "y": 48.86, "t": "Stomach", "tag": true, "q": false}, {"x": 96.84, "y": 51.9, "t": "Pancreas", "tag": true, "q": false}, {"x": 96.6, "y": 55.14, "t": "Spleen", "tag": false, "q": false}, {"x": 79.16, "y": 68.48, "t": "transverse colon", "tag": true, "q": false}, {"x": 79.27, "y": 73.62, "t": "descending colon", "tag": true, "q": false}, {"x": 79.16, "y": 78.57, "t": "ascending colon", "tag": true, "q": false}, {"x": 79.39, "y": 83.71, "t": "cecum", "tag": true, "q": false}, {"x": 79.27, "y": 86.86, "t": "sigmoid colon", "tag": true, "q": false}, {"x": 79.27, "y": 90.0, "t": "rectum", "tag": true, "q": false}, {"x": 79.39, "y": 93.14, "t": "appendix", "tag": true, "q": false}, {"x": 79.51, "y": 96.19, "t": "Anal canal", "tag": false, "q": false}, {"x": 96.72, "y": 81.81, "t": "Large Intestine", "tag": true, "q": false}]}, {"id": "ex_38-02", "num": 24, "sec": "Digestive anatomy", "title": "Fig 38.2 Layers of the alimentary canal wall", "w": 1114, "h": 917, "pins": [{"x": 31.96, "y": 85.82, "t": "Nerve", "tag": false, "q": false}, {"x": 30.52, "y": 89.64, "t": "Artery", "tag": false, "q": false}, {"x": 28.73, "y": 93.35, "t": "Vein", "tag": false, "q": false}, {"x": 26.75, "y": 96.73, "t": "Lymphatic vessel", "tag": false, "q": false}, {"x": 12.12, "y": 97.16, "t": "Mesentery", "tag": true, "q": false}, {"x": 64.81, "y": 13.2, "t": "Myenteric nerve plexus", "tag": false, "q": false}, {"x": 64.99, "y": 16.58, "t": "Submucosal nerve plexus", "tag": false, "q": false}, {"x": 97.4, "y": 26.06, "t": "Glands in submucosa", "tag": false, "q": false}, {"x": 97.58, "y": 40.24, "t": "Mucosa: epithelium", "tag": true, "q": false}, {"x": 97.49, "y": 43.73, "t": "Mucosa: lamina propria", "tag": true, "q": false}, {"x": 97.49, "y": 47.11, "t": "Mucosa: muscularis mucosa", "tag": true, "q": false}, {"x": 97.4, "y": 55.51, "t": "Submucosa", "tag": true, "q": false}, {"x": 97.58, "y": 65.87, "t": "Muscularis externa: longitudinal layer", "tag": true, "q": false}, {"x": 97.49, "y": 69.36, "t": "Muscularis externa: circular layer", "tag": true, "q": false}, {"x": 97.49, "y": 79.06, "t": "Serosa: epithelium (mesothelium)", "tag": true, "q": false}, {"x": 97.58, "y": 82.33, "t": "Serosa: connective tissue", "tag": true, "q": false}, {"x": 97.22, "y": 88.33, "t": "Lumen", "tag": false, "q": false}, {"x": 97.67, "y": 93.89, "t": "Mucosa-associated lymphoid tissue (MALT)", "tag": false, "q": false}, {"x": 66.34, "y": 90.08, "t": "Gland in mucosa", "tag": false, "q": false}, {"x": 74.06, "y": 91.82, "t": "Duct of gland outside alimentary canal", "tag": false, "q": false}]}, {"id": "ex_38-03", "num": 25, "sec": "Digestive anatomy", "title": "Fig 38.11 Human dentition (lower jaw): name tooth A-D", "w": 821, "h": 957, "pins": [{"x": 93.18, "y": 7.94, "t": "incisor (central incisor)", "tag": true, "q": false}, {"x": 93.18, "y": 39.29, "t": "canine", "tag": true, "q": false}, {"x": 93.79, "y": 60.19, "t": "premolar (first premolar)", "tag": true, "q": false}, {"x": 96.83, "y": 87.36, "t": "molar (first molar)", "tag": true, "q": false}]}, {"id": "ex_38-04", "num": 26, "sec": "Digestive anatomy", "title": "Fig 38.12a Salivary glands and ducts", "w": 1260, "h": 894, "pins": [{"x": 8.97, "y": 24.83, "t": "Tongue", "tag": true, "q": false}, {"x": 6.98, "y": 32.89, "t": "Teeth", "tag": true, "q": false}, {"x": 10.63, "y": 41.16, "t": "sublingual duct", "tag": true, "q": false}, {"x": 13.1, "y": 65.88, "t": "sublingual glands", "tag": true, "q": false}, {"x": 94.76, "y": 33.89, "t": "parotid glands", "tag": true, "q": false}, {"x": 85.08, "y": 47.65, "t": "parotid duct", "tag": true, "q": false}, {"x": 84.84, "y": 78.52, "t": "submandibular duct", "tag": true, "q": true}, {"x": 84.84, "y": 87.81, "t": "submandibular glands", "tag": true, "q": false}]}, {"id": "ex_38-05", "num": 27, "sec": "Digestive anatomy", "title": "Fig 38.4 Sagittal head: oral cavity and pharynx", "w": 989, "h": 1047, "pins": [{"x": 27.1, "y": 69.91, "t": "Tongue", "tag": true, "q": false}, {"x": 33.16, "y": 75.64, "t": "Hyoid bone", "tag": true, "q": false}, {"x": 97.27, "y": 3.63, "t": "Hard palate", "tag": false, "q": false}, {"x": 97.17, "y": 9.17, "t": "Soft palate", "tag": false, "q": false}, {"x": 97.17, "y": 14.33, "t": "Oral cavity", "tag": false, "q": false}, {"x": 97.17, "y": 19.39, "t": "Uvula", "tag": true, "q": false}, {"x": 97.27, "y": 24.74, "t": "Palatoglossal arch", "tag": false, "q": false}, {"x": 97.27, "y": 30.28, "t": "Palatine tonsils", "tag": true, "q": false}, {"x": 97.27, "y": 38.4, "t": "Oropharynx", "tag": true, "q": false}, {"x": 97.27, "y": 44.32, "t": "Lingual tonsils", "tag": true, "q": false}, {"x": 97.37, "y": 51.38, "t": "Epiglottis", "tag": true, "q": false}, {"x": 97.37, "y": 64.18, "t": "Laryngopharynx", "tag": true, "q": false}, {"x": 97.37, "y": 78.22, "t": "Esophagus", "tag": true, "q": false}, {"x": 97.37, "y": 94.84, "t": "Trachea", "tag": true, "q": false}]}, {"id": "ex_38-06", "num": 28, "sec": "Digestive anatomy", "title": "Fig 38.5a Stomach, gross anatomy", "w": 1048, "h": 1015, "pins": [{"x": 48.47, "y": 3.05, "t": "cardia (quiz also accepted: gastroesophageal sphincter)", "tag": true, "q": true}, {"x": 15.36, "y": 15.37, "t": "Esophagus", "tag": true, "q": false}, {"x": 27.58, "y": 27.78, "t": "Muscularis externa: longitudinal layer", "tag": true, "q": false}, {"x": 22.14, "y": 31.33, "t": "Muscularis externa: circular layer", "tag": true, "q": false}, {"x": 21.85, "y": 34.38, "t": "Muscularis externa: oblique layer", "tag": true, "q": false}, {"x": 38.74, "y": 46.5, "t": "Lesser curvature", "tag": false, "q": false}, {"x": 26.53, "y": 87.88, "t": "pyloric sphincter", "tag": true, "q": true}, {"x": 9.26, "y": 89.66, "t": "duodenum", "tag": true, "q": false}, {"x": 97.52, "y": 4.43, "t": "fundus", "tag": true, "q": true}, {"x": 96.47, "y": 22.46, "t": "Serosa", "tag": true, "q": false}, {"x": 96.66, "y": 33.89, "t": "body", "tag": true, "q": true}, {"x": 96.66, "y": 43.55, "t": "Lumen", "tag": false, "q": false}, {"x": 96.56, "y": 51.72, "t": "rugae", "tag": true, "q": true}, {"x": 91.51, "y": 72.81, "t": "Greater curvature", "tag": false, "q": false}, {"x": 72.81, "y": 87.78, "t": "pylorus (pyloric antrum)", "tag": true, "q": false}, {"x": 55.82, "y": 87.88, "t": "pylorus (pyloric canal)", "tag": true, "q": true}]}, {"id": "ex_38-08", "num": 29, "sec": "Digestive anatomy", "title": "Fig 38.7b Lesser omentum (liver lifted)", "w": 923, "h": 954, "pins": [{"x": 2.82, "y": 9.33, "t": "Liver", "tag": true, "q": false}, {"x": 11.59, "y": 17.82, "t": "Gall bladder", "tag": true, "q": false}, {"x": 20.15, "y": 23.69, "t": "Lesser omentum", "tag": true, "q": false}, {"x": 8.02, "y": 34.91, "t": "Stomach", "tag": true, "q": false}, {"x": 10.73, "y": 40.04, "t": "duodenum", "tag": true, "q": false}, {"x": 19.39, "y": 50.1, "t": "transverse colon", "tag": true, "q": false}, {"x": 15.93, "y": 62.47, "t": "Small intestine", "tag": true, "q": false}, {"x": 5.63, "y": 82.08, "t": "cecum", "tag": true, "q": false}, {"x": 17.01, "y": 90.67, "t": "Urinary bladder", "tag": false, "q": false}]}, {"id": "ex_38-09", "num": 30, "sec": "Digestive anatomy", "title": "Fig 38.7c Peritoneum and mesenteries (sagittal); colored bars = name that membrane", "w": 903, "h": 1043, "pins": [{"x": 66.33, "y": 12.85, "t": "Liver", "tag": true, "q": false}, {"x": 82.39, "y": 17.64, "t": "Lesser omentum (yellow)", "tag": true, "q": false}, {"x": 66.45, "y": 22.91, "t": "Pancreas", "tag": true, "q": false}, {"x": 66.45, "y": 27.8, "t": "Stomach", "tag": true, "q": false}, {"x": 66.45, "y": 32.31, "t": "duodenum", "tag": true, "q": false}, {"x": 82.39, "y": 38.16, "t": "Mesocolon (transverse mesocolon, red)", "tag": true, "q": false}, {"x": 66.45, "y": 43.91, "t": "transverse colon", "tag": true, "q": false}, {"x": 82.39, "y": 48.71, "t": "Mesentery proper (purple)", "tag": true, "q": false}, {"x": 82.39, "y": 54.46, "t": "Greater omentum (dark blue)", "tag": true, "q": true}, {"x": 66.45, "y": 59.06, "t": "jejunum", "tag": true, "q": false}, {"x": 66.45, "y": 64.91, "t": "ileum", "tag": true, "q": false}, {"x": 82.39, "y": 70.28, "t": "Visceral peritoneum (light blue)", "tag": true, "q": false}, {"x": 82.39, "y": 75.26, "t": "Parietal peritoneum (green)", "tag": true, "q": false}, {"x": 66.45, "y": 79.96, "t": "Urinary bladder", "tag": false, "q": false}, {"x": 66.45, "y": 83.89, "t": "rectum", "tag": true, "q": false}]}, {"id": "ex_38-10", "num": 31, "sec": "Digestive anatomy", "title": "Fig 38.8a Small intestine surface-area modifications", "w": 685, "h": 844, "pins": [{"x": 16.93, "y": 38.27, "t": "Muscularis externa (muscle layers)", "tag": true, "q": false}, {"x": 18.69, "y": 49.17, "t": "circular folds", "tag": true, "q": false}, {"x": 9.34, "y": 63.86, "t": "Villi", "tag": true, "q": false}, {"x": 84.09, "y": 19.79, "t": "Vein carrying blood to hepatic portal vein", "tag": false, "q": false}, {"x": 94.6, "y": 44.55, "t": "Lumen", "tag": false, "q": false}]}, {"id": "ex_38-11", "num": 32, "sec": "Digestive anatomy", "title": "Fig 38.10 Large intestine", "w": 1106, "h": 1047, "pins": [{"x": 7.05, "y": 15.09, "t": "Right colic (hepatic) flexure", "tag": false, "q": false}, {"x": 13.92, "y": 27.13, "t": "transverse colon", "tag": true, "q": true}, {"x": 5.15, "y": 34.96, "t": "Superior mesenteric artery", "tag": false, "q": false}, {"x": 6.78, "y": 44.41, "t": "haustra", "tag": true, "q": true}, {"x": 13.47, "y": 50.43, "t": "ascending colon", "tag": true, "q": true}, {"x": 2.35, "y": 54.54, "t": "ileum", "tag": true, "q": false}, {"x": 11.75, "y": 63.32, "t": "ileocecal valve", "tag": true, "q": true}, {"x": 4.07, "y": 76.31, "t": "cecum", "tag": true, "q": true}, {"x": 6.33, "y": 84.81, "t": "appendix", "tag": true, "q": true}, {"x": 41.95, "y": 85.96, "t": "rectum", "tag": true, "q": true}, {"x": 44.76, "y": 93.6, "t": "anus (bracket = anal canal; your quiz keyed this spot as anus)", "tag": true, "q": true}, {"x": 97.65, "y": 5.16, "t": "Left colic (splenic) flexure", "tag": false, "q": false}, {"x": 97.65, "y": 11.75, "t": "Mesocolon (transverse mesocolon)", "tag": true, "q": false}, {"x": 97.65, "y": 20.34, "t": "Epiploic appendages (fat)", "tag": false, "q": false}, {"x": 97.65, "y": 39.06, "t": "descending colon", "tag": true, "q": true}, {"x": 97.65, "y": 56.54, "t": "Cut edge of mesentery", "tag": false, "q": false}, {"x": 97.56, "y": 63.51, "t": "taenia coli", "tag": true, "q": true}, {"x": 97.65, "y": 74.21, "t": "sigmoid colon", "tag": true, "q": true}, {"x": 64.47, "y": 95.22, "t": "anal sphincters (external anal sphincter)", "tag": true, "q": true}]}, {"id": "ex_38-12", "num": 33, "sec": "Digestive anatomy", "title": "Fig 38.14a Liver, posteroinferior view", "w": 952, "h": 746, "pins": [{"x": 31.93, "y": 8.71, "t": "Caudate lobe", "tag": true, "q": false}, {"x": 2.73, "y": 21.58, "t": "L lobe (left lobe of liver)", "tag": true, "q": false}, {"x": 50.42, "y": 92.09, "t": "Quadrate lobe", "tag": true, "q": false}, {"x": 60.29, "y": 3.49, "t": "Hepatic veins", "tag": false, "q": false}, {"x": 97.27, "y": 6.17, "t": "Inferior vena cava", "tag": false, "q": false}, {"x": 96.95, "y": 73.73, "t": "Gall bladder", "tag": true, "q": false}, {"x": 96.95, "y": 82.71, "t": "R lobe (right lobe of liver)", "tag": true, "q": false}]}, {"id": "ex_38-13", "num": 34, "sec": "Digestive anatomy", "title": "Fig 38.15 Ducts of liver, gallbladder, pancreas", "w": 913, "h": 911, "pins": [{"x": 14.35, "y": 65.75, "t": "Gall bladder mucosa (with folds)", "tag": false, "q": false}, {"x": 20.15, "y": 75.41, "t": "Gall bladder", "tag": true, "q": true}, {"x": 26.62, "y": 80.68, "t": "major duodenal papilla", "tag": true, "q": true}, {"x": 30.01, "y": 91.0, "t": "hepatopancreatic ampulla (ring = hepatopancreatic sphincter)", "tag": true, "q": true}, {"x": 41.07, "y": 97.15, "t": "duodenum", "tag": true, "q": true}, {"x": 54.22, "y": 96.27, "t": "head (of pancreas)", "tag": true, "q": false}, {"x": 87.62, "y": 22.17, "t": "L/R hepatic ducts", "tag": true, "q": true}, {"x": 76.56, "y": 34.47, "t": "cystic duct", "tag": true, "q": true}, {"x": 67.14, "y": 39.85, "t": "common hepatic duct", "tag": true, "q": true}, {"x": 66.48, "y": 44.9, "t": "common bile duct", "tag": true, "q": true}, {"x": 65.5, "y": 49.51, "t": "accessory pancreatic duct", "tag": true, "q": true}, {"x": 96.5, "y": 65.97, "t": "tail (of pancreas)", "tag": true, "q": false}, {"x": 80.61, "y": 73.77, "t": "body (of pancreas)", "tag": true, "q": false}, {"x": 80.61, "y": 80.02, "t": "jejunum", "tag": true, "q": true}, {"x": 62.87, "y": 86.5, "t": "Main pancreatic duct", "tag": true, "q": true}]}, {"id": "ex_36-13", "num": 35, "sec": "Histology figures", "title": "Fig 36.6a Tracheal wall, cross section", "w": 1037, "h": 991, "pins": [{"x": 22.95, "y": 46.82, "t": "Esophagus", "tag": false, "q": false}, {"x": 22.57, "y": 56.81, "t": "Trachealis muscle (smooth muscle)", "tag": false, "q": false}, {"x": 92.77, "y": 13.32, "t": "Mucosa (pseudostratified ciliated columnar epithelium)", "tag": false, "q": false}, {"x": 92.86, "y": 49.45, "t": "Submucosa", "tag": false, "q": false}, {"x": 97.49, "y": 56.91, "t": "Sero-mucous gland (in submucosa)", "tag": false, "q": false}, {"x": 92.29, "y": 72.45, "t": "Hyaline cartilage (tracheal cartilage, C-shaped ring)", "tag": false, "q": false}, {"x": 92.67, "y": 81.63, "t": "Adventitia", "tag": false, "q": false}]}, {"id": "ex_36-14", "num": 36, "sec": "Histology figures", "title": "Fig 36.6b Trachea histology (photomicrograph)", "w": 867, "h": 1047, "pins": [{"x": 4.84, "y": 8.79, "t": "Pseudostratified ciliated columnar epithelium (mucosa)", "tag": false, "q": false}, {"x": 3.11, "y": 23.4, "t": "Lamina propria (connective tissue of mucosa)", "tag": false, "q": false}, {"x": 9.92, "y": 47.18, "t": "Sero-mucous gland (in submucosa)", "tag": false, "q": false}, {"x": 3.0, "y": 63.13, "t": "Hyaline cartilage (tracheal cartilage)", "tag": false, "q": false}]}, {"id": "ex_36-15", "num": 37, "sec": "Histology figures", "title": "Fig 36.7b Lung histology: bronchiole and alveoli", "w": 1415, "h": 605, "pins": [{"x": 56.68, "y": 4.3, "t": "Respiratory bronchiole (bronchioles)", "tag": false, "q": true}, {"x": 57.67, "y": 20.5, "t": "Alveolar duct", "tag": false, "q": true}, {"x": 59.58, "y": 67.11, "t": "alveoli", "tag": true, "q": false}, {"x": 56.61, "y": 80.83, "t": "Alveolar sac", "tag": false, "q": false}, {"x": 90.95, "y": 23.47, "t": "alveoli", "tag": true, "q": false}, {"x": 65.09, "y": 66.94, "t": "Alveolar pores", "tag": false, "q": false}]}, {"id": "ex_38-07", "num": 38, "sec": "Histology figures", "title": "Fig 38.5d Gastric pits and glands", "w": 591, "h": 1043, "pins": [{"x": 4.91, "y": 35.19, "t": "gastric pits", "tag": true, "q": false}, {"x": 4.4, "y": 59.16, "t": "gastric glands", "tag": true, "q": false}, {"x": 38.58, "y": 93.96, "t": "Enteroendocrine cell", "tag": false, "q": false}, {"x": 78.34, "y": 2.49, "t": "gastric pits (openings on surface)", "tag": true, "q": false}, {"x": 95.6, "y": 17.64, "t": "simple columnar epithelial cells (surface mucous cells)", "tag": true, "q": false}, {"x": 95.43, "y": 40.46, "t": "Mucous neck cells", "tag": false, "q": false}, {"x": 95.43, "y": 51.68, "t": "parietal cells", "tag": true, "q": false}, {"x": 95.6, "y": 76.41, "t": "chief cells", "tag": true, "q": false}]}, {"id": "ex_38-14", "num": 39, "sec": "Histology figures", "title": "Esophagus cross section (histology)", "w": 1251, "h": 966, "pins": [{"x": 70.02, "y": 38.61, "t": "Mucosa (stratified squamous epithelium)", "tag": true, "q": false}, {"x": 70.02, "y": 50.62, "t": "Submucosa", "tag": true, "q": false}, {"x": 69.94, "y": 63.56, "t": "Lumen", "tag": false, "q": false}, {"x": 69.94, "y": 73.29, "t": "Muscularis externa: circular layer", "tag": true, "q": false}, {"x": 70.02, "y": 76.81, "t": "Muscularis externa: longitudinal layer", "tag": true, "q": false}, {"x": 69.94, "y": 86.23, "t": "Adventitia (no serosa here)", "tag": false, "q": false}]}, {"id": "ex_38-15", "num": 40, "sec": "Histology figures", "title": "Fig 38.9a Duodenum (histology)", "w": 641, "h": 809, "pins": [{"x": 95.79, "y": 16.81, "t": "Villi (one villus)", "tag": true, "q": false}, {"x": 95.94, "y": 23.11, "t": "Simple columnar epithelium (absorptive cells)", "tag": true, "q": false}, {"x": 95.94, "y": 35.11, "t": "lamina propria (core of villus)", "tag": true, "q": false}, {"x": 95.94, "y": 44.5, "t": "intestinal crypts", "tag": true, "q": false}, {"x": 95.94, "y": 58.84, "t": "muscularis mucosa", "tag": true, "q": false}, {"x": 95.94, "y": 68.85, "t": "Duodenal glands (in submucosa)", "tag": false, "q": false}]}, {"id": "ex_38-16", "num": 41, "sec": "Histology figures", "title": "Fig 38.9b Ileum (histology)", "w": 797, "h": 821, "pins": [{"x": 96.24, "y": 9.87, "t": "Villi", "tag": true, "q": false}, {"x": 96.74, "y": 52.5, "t": "Submucosa (here filled with lymphoid tissue)", "tag": true, "q": false}, {"x": 96.61, "y": 73.93, "t": "Peyer Patches (aggregated lymphoid follicles)", "tag": true, "q": false}, {"x": 96.36, "y": 84.29, "t": "Muscularis externa", "tag": true, "q": false}]}, {"id": "ex_38-17", "num": 42, "sec": "Histology figures", "title": "Fig 38.9c Large intestine / colon (histology)", "w": 800, "h": 788, "pins": [{"x": 96.75, "y": 7.99, "t": "Lumen", "tag": false, "q": false}, {"x": 96.75, "y": 28.05, "t": "goblet cells", "tag": true, "q": false}, {"x": 96.75, "y": 43.27, "t": "lamina propria (between crypts)", "tag": true, "q": false}, {"x": 96.75, "y": 71.07, "t": "muscularis mucosa", "tag": true, "q": false}, {"x": 96.75, "y": 84.77, "t": "Submucosa", "tag": true, "q": false}]}], "quiz": [{"src": "Week 6A pre-lab (Respiratory Anatomy)", "q": "Fissures divide the lungs into lobes, three on the right and ____ on the left.", "type": "mc", "choices": ["four", "two", "three"], "a": "two", "img": null}, {"src": "Week 6A pre-lab (Respiratory Anatomy)", "q": "Internal respiration is the exchange of gases between the blood and air-filled chambers of the lungs.", "type": "tf", "choices": ["True", "False"], "a": "False", "img": null}, {"src": "Week 6A pre-lab (Respiratory Anatomy)", "q": "This structure covers the glottis during swallowing of food and drinks.", "type": "mc", "choices": ["epiglottis", "conchae", "larynx", "palate"], "a": "epiglottis", "img": null}, {"src": "Week 6A pre-lab (Respiratory Anatomy)", "q": "The upper respiratory structures include the nose, the larynx, and the ____.", "type": "mc", "choices": ["lungs", "epiglottis", "pharynx", "trachea"], "a": "pharynx", "img": null}, {"src": "Week 6A pre-lab (Respiratory Anatomy)", "q": "The alveoli are made up of ____.", "type": "mc", "choices": ["simple columnar epithelium", "pseudostratified columnar epithelium", "simple squamous epithelium", "simple cuboidal epithelium"], "a": "simple squamous epithelium", "img": null}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Identify the structure marked by the red curve (on the lung/bronchial tree model).", "type": "id", "choices": ["Tertiary bronchi", "Trachea", "Carina", "Secondary bronchi", "Primary Bronchus"], "a": "Carina", "img": "img/q/5.jpg"}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Identify the structure labeled D (sinus figure).", "type": "id", "choices": ["Uvula", "Maxillary sinus", "Pharyngeal tonsil", "Sphenoid sinus", "Inferior nasal concha", "Frontal sinus"], "a": "Maxillary sinus", "img": "img/q/6.jpg"}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "The right lung has superior, middle, and inferior lobes. Which lobe is missing on the left side?", "type": "mc", "choices": ["inferior", "middle", "superior"], "a": "middle", "img": null}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Identify the structure labeled A (head model, midsagittal).", "type": "id", "choices": ["Middle nasal concha", "Inferior nasal concha", "Superior nasal conchae", "Sphenoid sinus"], "a": "Inferior nasal concha", "img": "img/q/8.jpg"}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Identify the region of the lung labeled C.", "type": "id", "choices": ["Right superior lobe", "Diaphragm", "Left superior lobe", "Right oblique fissure", "Cardiac notch"], "a": "Cardiac notch", "img": "img/q/9.jpg"}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Which represents the correct anatomical sequence of air flow during inhalation, including the transition through upper and lower tracts?", "type": "mc", "choices": [], "a": "Nasal cavity -> Pharynx -> Larynx -> Trachea -> Primary bronchi -> Secondary bronchi -> Tertiary bronchi -> Bronchioles -> Terminal bronchioles -> Respiratory bronchioles -> Alveolar ducts -> Alveoli", "img": null}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "The trachea divides into ____ bronchi that lead to the lungs.", "type": "mc", "choices": ["3", "4", "5", "2"], "a": "2", "img": null}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Match the structure name with the letter (pharynx figure): Nasopharynx, Oropharynx, Pharynx, Laryngopharynx.", "type": "match", "choices": [], "a": "Nasopharynx = A; Oropharynx = B; Laryngopharynx = C; Pharynx (whole bracket) = D", "img": "img/q/12.jpg"}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Match the structure name with the letter (lung histology + alveolar drawing): Alveolar sac, Respiratory bronchioles, Alveoli, Alveolar duct.", "type": "match", "choices": [], "a": "Respiratory bronchioles = A; Alveolar sac = B; Alveolar duct = C; Alveoli = D", "img": "img/q/13.jpg"}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Identify the structure labeled B (larynx, anterior and sagittal views).", "type": "id", "choices": ["Vestibular folds", "Hyoid bone", "Thyroid cartilage", "Cricoid cartilage", "Epiglottis", "Vocal folds", "Glottis"], "a": "Epiglottis", "img": "img/q/14.jpg"}, {"src": "Week 6B post-lab (Respiratory Anatomy)", "q": "Identify the structure labeled * (lung/thoracic wall inset).", "type": "id", "choices": ["Visceral pericardium", "Parietal pleura", "Parietal pericardium", "Visceral pleura", "Pulmonary arteries"], "a": "Parietal pleura", "img": "img/q/15.jpg"}, {"src": "Week 7A pre-lab (Resp & CV Physiology)", "q": "The first heart sound heard in a cardiac cycle is from the ____.", "type": "mc", "choices": ["the ventricles contracting", "closure of the SL valves", "closure of the AV valves", "the atria contracting"], "a": "closure of the AV valves", "img": null}, {"src": "Week 7A pre-lab (Resp & CV Physiology)", "q": "Systole refers to:", "type": "mc", "choices": ["atrial contraction", "atrial relaxation", "ventricular relaxation", "ventricular contraction"], "a": "ventricular contraction", "img": null}, {"src": "Week 7A pre-lab (Resp & CV Physiology)", "q": "Match the function of inspiration or expiration with the correct respiratory muscle.", "type": "match", "choices": [], "a": "Abdominal muscles = depress the lower ribs and push up the diaphragm; Sternocleidomastoid = elevates the sternum; External intercostals = increase the width of the thoracic cavity; Diaphragm = increases the height of the thoracic cavity; Internal intercostal = contracts to pull the ribs down; Scalenes = elevate and fix the upper ribs", "img": null}, {"src": "Week 7A pre-lab (Resp & CV Physiology)", "q": "Which artery is NOT one that a pulse is palpated on?", "type": "mc", "choices": ["radial artery", "brachial artery", "ulnar artery", "common carotid artery"], "a": "ulnar artery", "img": null}, {"src": "Week 7A pre-lab (Resp & CV Physiology)", "q": "Match each lung capacity with its definition.", "type": "match", "choices": [], "a": "Total lung capacity = max air in lungs after maximum inspiratory effort; Functional residual capacity = air remaining in lungs after normal tidal expiration; Vital capacity = max air that can be expired after a maximum inspiratory effort; Inspiratory capacity = max air that can be inspired after normal tidal expiration", "img": null}, {"src": "Week 7A pre-lab (Resp & CV Physiology)", "q": "Match each respiratory volume with its definition.", "type": "match", "choices": [], "a": "Residual volume = air remaining in lungs after a forced expiration; Tidal volume = air inhaled or exhaled with each breath under resting conditions; Expiratory reserve volume = air that can be forcefully exhaled after a normal tidal expiration; Inspiratory reserve volume = air that can be forcefully inhaled after a normal tidal inspiration", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "Heart murmurs ____.", "type": "mc", "choices": [], "a": "often indicate problems with heart valves, can be used to diagnose failure of the heart valves to close tightly, and can be used to diagnose constricted heart valves", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "During a cardiac cycle, the first heart sound 'lub' is heard. Which valves close and what is happening to the ventricles?", "type": "mc", "choices": [], "a": "Atrioventricular (mitral and tricuspid) valves close as the ventricles begin to contract.", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "Match the term or definition with the correct letter on the spirogram (A-E).", "type": "match", "choices": [], "a": "Inspiratory reserve volume = A; Tidal volume (air in/out during relaxed breathing) = B; Expiratory reserve volume (air forcibly exhaled after a tidal expiration) = C; Residual volume = D; Vital capacity = E (bracket A+B+C)", "img": "img/q/24.jpg"}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "These muscles are active during quiet expiration.", "type": "mc", "choices": ["diaphragm", "internal intercostals", "None are active", "external intercostals"], "a": "None are active", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "Which muscles are activated during forced expiration?", "type": "mc", "choices": ["the scalenes, sternocleidomastoid, and pectoralis minor muscles", "the internal intercostal, oblique, and transversus muscles", "the diaphragm and internal intercostal muscle", "the diaphragm and external intercostal muscles"], "a": "the internal intercostal, oblique, and transversus muscles", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "A person's heart rate is 73 bpm. How many 'lub' and 'dub' sounds in one minute?", "type": "mc", "choices": ["146 lub and 146 dub", "146 lub and 73 dub", "73 lub and 73 dub", "73 lub and 146 dub"], "a": "73 lub and 73 dub", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "Tidal volume is ____.", "type": "mc", "choices": [], "a": "the amount of air inhaled or exhaled with each resting breath", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "Arrange the anatomical sequence of air flow during inhalation: Larynx, Alveoli, Bronchi, Nasal cavity, Trachea, Pharynx, Bronchioles.", "type": "match", "choices": [], "a": "1 Nasal cavity, 2 Pharynx, 3 Larynx, 4 Trachea, 5 Bronchi, 6 Bronchioles, 7 Alveoli", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "Which represents the correct anatomical sequence of air flow during exhalation?", "type": "mc", "choices": [], "a": "Alveoli -> Alveolar ducts -> Respiratory bronchioles -> Terminal bronchioles -> Bronchioles -> Tertiary bronchi -> Secondary bronchi -> Primary bronchi -> Trachea", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "Identify the respiratory muscle labeled B (anterior chest, deep to pectoralis).", "type": "id", "choices": ["serratus anterior", "rectus abdominis", "sternocleidomastoid", "scalene muscles", "pectoralis minor"], "a": "serratus anterior", "img": "img/q/31.jpg"}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "In a clinical setting, how does Vital Capacity help distinguish types of pulmonary impairment?", "type": "mc", "choices": [], "a": "A reduction in VC is a hallmark sign of decreased lung compliance or 'stiff' lungs.", "img": null}, {"src": "Week 7B post-lab (Resp & CV Physiology)", "q": "Match each respiratory structure with its diagnostic histological feature.", "type": "match", "choices": [], "a": "Trachea = C-shaped hyaline cartilage rings, pseudostratified ciliated columnar epithelium with goblet cells; Bronchi = irregular plates of hyaline cartilage, smooth muscle, ciliated epithelium; Bronchiole = no cartilage, prominent smooth muscle, epithelium becomes simpler; Alveoli = thin-walled air sacs of simple squamous cells with surrounding capillaries, site of gas exchange", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "What are the 3 sections of the small intestine from proximal to distal?", "type": "mc", "choices": [], "a": "duodenum - jejunum - ileum", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "What is NOT part of the mucosa of the alimentary canal?", "type": "mc", "choices": ["lamina propria", "epithelium", "muscularis externa", "muscularis mucosae"], "a": "muscularis externa", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "Which is NOT one of the 3 major pairs of salivary glands?", "type": "mc", "choices": ["sublingual", "submandibular", "parotid", "pharyngeal"], "a": "pharyngeal", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "The liver has ____ lobes.", "type": "mc", "choices": ["3", "5", "4", "2"], "a": "4", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "What is NOT part of the portal triad?", "type": "mc", "choices": ["portal nerve", "bile duct", "portal venule", "portal arteriole"], "a": "portal nerve", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "Which is NOT a layer of the muscularis externa of the stomach?", "type": "mc", "choices": ["circular layer", "oblique layer", "transverse layer", "longitudinal layer"], "a": "transverse layer", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "Which structure is connected to the cecum?", "type": "mc", "choices": ["sigmoid colon", "anus", "transverse colon", "appendix"], "a": "appendix", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "The funnel-shaped pouch that forms the distal end of the stomach is the:", "type": "mc", "choices": ["pylorus", "cardia", "body", "fundus"], "a": "pylorus", "img": null}, {"src": "Week 8A pre-lab (Digestive System)", "q": "Where are most of the Peyer patches located?", "type": "mc", "choices": ["in the stomach", "in the duodenum", "in the ileum", "in the sigmoid colon"], "a": "in the ileum", "img": null}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Match the letter with the correct label (stomach, Fig 38.5a).", "type": "match", "choices": [], "a": "A = Gastroesophageal sphincter AND Cardia (both accepted); B = Fundus; C = Body; D = Rugae; E = Pylorus; F = Pyloric sphincter", "img": "img/q/43.jpg"}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Identify the structure labeled D (sagittal peritoneum figure with color bars).", "type": "id", "choices": ["Lesser omentum", "Parietal peritoneum", "Visceral peritoneum", "Mesocolon", "Greater omentum", "Mesentery proper"], "a": "Greater omentum", "img": "img/q/44.jpg"}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Match the letter with the correct label (liver, gallbladder, pancreas, duodenum).", "type": "match", "choices": [], "a": "Duodenum = A; Major duodenal papilla = B; Jejunum = C; Gall bladder = D; R hepatic lobe = E; L hepatic lobe = F; Pancreas = G", "img": "img/q/45.jpg"}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Identify the structure labeled E (deciduous teeth).", "type": "id", "choices": ["molar", "premolar", "incisor", "canine"], "a": "molar", "img": "img/q/46.jpg"}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Match the letter with the correct label (ducts of accessory digestive organs).", "type": "match", "choices": [], "a": "L/R hepatic duct(s) = A; Cystic duct = B; Common hepatic duct = C; Common bile duct = D; Hepatopancreatic ampulla AND Hepatopancreatic sphincter = E; Main pancreatic duct = F; Accessory pancreatic duct = G", "img": "img/q/47.jpg"}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Match the letter with the correct label (large intestine, set 1).", "type": "match", "choices": [], "a": "Descending colon = G; Taenia coli = H; Sigmoid colon = I; Rectum = J; Anus = K; Anal sphincters = L", "img": "img/q/48.jpg"}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Match the structures with their description.", "type": "match", "choices": [], "a": "Rugae = folds of gastric mucosa; Peyer's patches = large collections of lymphoid tissue in the mucosa of the small intestine; Hard palate = bone-supported anterosuperior boundary of the oral cavity; Circular folds = deep folds of mucosa and submucosa around the small intestine; Greater omentum = covers abdominal organs like an apron; Mesentery = suspends the small intestine from the posterior body wall", "img": null}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Match the letter with the correct label (large intestine, set 2).", "type": "match", "choices": [], "a": "Appendix = A; Cecum = B; Ileocecal valve = C; Ascending colon = D; Haustra = E (bracket); Transverse colon = F", "img": "img/q/50.jpg"}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Match the letter with the correct label (alimentary canal wall layers).", "type": "match", "choices": [], "a": "Mucosa = A; Submucosa = B; Muscularis externa = C; Serosa = D", "img": "img/q/51.jpg"}, {"src": "Week 8B post-lab (Digestive Anatomy)", "q": "Identify the structure labeled C (salivary glands figure).", "type": "id", "choices": ["sublingual glands", "sublingual ducts", "submandibular ducts", "parotid glands", "submandibular glands", "parotid ducts"], "a": "submandibular ducts", "img": "img/q/52.jpg"}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "Bile ____.", "type": "mc", "choices": [], "a": "emulsifies fat, keeping tiny fat droplets suspended in the aqueous contents of the gut", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "Which best defines an enzyme and its mechanism?", "type": "mc", "choices": [], "a": "Enzymes are biological catalysts, typically proteins, that speed up chemical reactions by lowering the activation energy without being consumed.", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "The evidence that trypsin digests protein in the lab is ____.", "type": "mc", "choices": ["a negative starch test", "the presence of a pink color in the test tube", "a positive Benedict's test", "the presence of a yellow color in the test tube"], "a": "the presence of a yellow color in the test tube", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "What typically happens to a human enzyme if the temperature is raised significantly above body temperature?", "type": "mc", "choices": [], "a": "The enzyme changes its shape (denatures) and loses its ability to function.", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "The pancreas produces this protein-digesting enzyme.", "type": "mc", "choices": ["enterokinase", "dipeptidase", "pepsin", "trypsin"], "a": "trypsin", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "This enzyme, produced by the salivary glands, digests carbohydrates.", "type": "mc", "choices": ["amylase", "oligosaccharidase", "sucrase", "glucoamylase"], "a": "amylase", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "This fat-digesting enzyme does the major work of digesting fats in the small intestine.", "type": "mc", "choices": ["amylase", "pepsin", "ribonuclease", "lipase"], "a": "lipase", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "Fat digestion results in ____.", "type": "mc", "choices": ["glycerol", "fatty acids", "monoglycerides and fatty acids", "monoglycerides"], "a": "monoglycerides and fatty acids", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "This test detects starch in solution.", "type": "mc", "choices": ["litmus test", "Benedict's test", "IKI (Lugol's iodine) test"], "a": "IKI (Lugol's iodine) test", "img": null}, {"src": "Week 9 pre-lab (Digestive Processes)", "q": "Digestive enzymes ____.", "type": "mc", "choices": ["break down substrates by dehydration", "break down substrates by hydrolysis", "control the movement of food from one digestive organ to the next", "are produced only within the GI tract"], "a": "break down substrates by hydrolysis", "img": null}, {"src": "Week 9B post-lab (Digestive Processes)", "q": "In the lipid experiment, which tube is the control showing litmus cream does not change color without lipase?", "type": "mc", "choices": [], "a": "Tube 2L (Litmus cream + Water)", "img": null}, {"src": "Week 9B post-lab (Digestive Processes)", "q": "In Activity 2, what is the purpose of boiling trypsin before testing with BAPNA?", "type": "mc", "choices": [], "a": "To denature trypsin and observe the effect of heat on its ability to break down BAPNA.", "img": null}, {"src": "Week 9B post-lab (Digestive Processes)", "q": "What result would you expect from Benedict's test in tube 5A (amylase + starch at 37 C)?", "type": "mc", "choices": [], "a": "Positive (green, orange, or red) because starch was hydrolyzed into maltose.", "img": null}, {"src": "Week 9B post-lab (Digestive Processes)", "q": "In Activity 2, comparing 4T (37 C) and 5T (0 C), what is the independent variable?", "type": "mc", "choices": [], "a": "The temperature at which the reaction is incubated", "img": null}, {"src": "Week 9B post-lab (Digestive Processes)", "q": "In Activity 3 (temperature vs lipid digestion), which variables should be kept constant? Select all that apply.", "type": "mc", "choices": ["The color change of the litmus indicator", "The incubation temperature", "The incubation time", "The amount of pancreatin added to each test tube", "The total volume of solution added to each test tube", "The amount of litmus cream added to each test tube"], "a": "The incubation time; the amount of pancreatin added; the total volume of solution; the amount of litmus cream added", "img": null}, {"src": "Week 9B post-lab (Digestive Processes)", "q": "Why does litmus cream turn pink when lipid digestion occurs?", "type": "mc", "choices": [], "a": "Lipase releases fatty acids, lowering the pH of the solution", "img": null}, {"src": "Week 9B post-lab (Digestive Processes)", "q": "Match each indicator/reagent with its result.", "type": "match", "choices": [], "a": "Iodine solution = detects starch, blue-black when present; Litmus cream = detects pH change from fatty acid production by lipase; Benedict's reagent = detects reducing sugars like maltose, color change on heating; BAPNA = substrate for trypsin, cleavage gives a yellow product", "img": null}, {"src": "Week 9B post-lab (Digestive Processes)", "q": "In Activity 1 (amylase), what is the dependent variable? Select all that apply.", "type": "mc", "choices": ["The length of time incubated", "The incubation temperature", "The color change observed in the Benedict's reagent test", "The color change observed in the Lugol's iodine test", "The amount of amylase added"], "a": "The color change in the Benedict's test AND the color change in the Lugol's iodine test", "img": null}], "mcq": [{"q": "Which structure is part of the respiratory zone?", "c": ["Terminal bronchiole", "Tertiary bronchus", "Alveolar duct", "Trachea"], "a": "C", "e": "Respiratory zone = respiratory bronchioles, alveolar ducts, alveolar sacs, alveoli. Everything up to the terminal bronchioles is conducting zone."}, {"q": "The cartilage that forms a complete ring and connects the larynx to the trachea is the", "c": ["thyroid cartilage", "cricoid cartilage", "epiglottis", "arytenoid cartilage"], "a": "B", "e": "Cricoid is the only complete ring. Thyroid is the big shield (Adam's apple) above it."}, {"q": "Which lung has a horizontal fissure?", "c": ["Left only", "Right only", "Both", "Neither"], "a": "B", "e": "Right lung: horizontal + oblique fissures (3 lobes). Left: oblique only (2 lobes) plus the cardiac notch."}, {"q": "The vocal folds plus the opening between them form the", "c": ["vestibule", "glottis", "epiglottis", "carina"], "a": "B", "e": "Glottis. Vestibular folds (false cords) sit above them."}, {"q": "Which paranasal sinus is in the cheekbone below the eye?", "c": ["Frontal", "Sphenoid", "Maxillary", "Ethmoid"], "a": "C", "e": "Maxillary (largest). Frontal = above the eyebrows; sphenoid = posterior, behind the nasal cavity."}, {"q": "The pharyngotympanic (auditory) tube opens into the", "c": ["oropharynx", "laryngopharynx", "nasopharynx", "larynx"], "a": "C", "e": "Nasopharynx; it equalizes middle-ear pressure."}, {"q": "Which tonsil sits at the base of the tongue?", "c": ["Pharyngeal", "Palatine", "Lingual", "Tubal"], "a": "C", "e": "Lingual. Pharyngeal = posterior nasopharynx (adenoids); palatine = sides of the oropharynx."}, {"q": "The serous membrane that lines the thoracic wall is the", "c": ["visceral pleura", "parietal pleura", "visceral pericardium", "mediastinum"], "a": "B", "e": "Parietal = wall. Visceral = on the lung surface."}, {"q": "Pulmonary arteries carry", "c": ["oxygenated blood to the lungs", "deoxygenated blood to the lungs", "oxygenated blood to the heart", "deoxygenated blood to the body"], "a": "B", "e": "Arteries leave the heart. Pulmonary arteries leave the right ventricle with O2-poor blood."}, {"q": "According to Boyle's law, when thoracic volume increases, intrapulmonary pressure", "c": ["increases and air flows out", "decreases and air flows in", "stays the same", "decreases and air flows out"], "a": "B", "e": "Pressure and volume are inversely related; air moves from high to low pressure."}, {"q": "Quiet expiration is", "c": ["active, using the internal intercostals", "passive, from elastic recoil of the lungs", "active, using the abdominal muscles", "caused by the diaphragm contracting"], "a": "B", "e": "No muscles contract in quiet expiration; muscles relax and lungs recoil."}, {"q": "Which muscle is an accessory muscle of INSPIRATION?", "c": ["Internal intercostals", "Rectus abdominis", "Scalenes", "Transversus abdominis"], "a": "C", "e": "Scalenes elevate the first two ribs. The other three are forced expiration muscles."}, {"q": "Vital capacity equals", "c": ["TV + IRV", "TV + IRV + ERV", "ERV + RV", "TV + IRV + ERV + RV"], "a": "B", "e": "VC = TV + IRV + ERV. Add RV to get TLC."}, {"q": "Which CANNOT be measured with a spirometer?", "c": ["Tidal volume", "Vital capacity", "Residual volume", "Expiratory reserve volume"], "a": "C", "e": "RV never leaves the lungs, so it is estimated (RV = VC x age factor). Anything that includes RV (FRC, TLC) also cannot be measured directly."}, {"q": "A subject's TV is 500 ml and respiratory rate is 12/min. The minute respiratory volume is", "c": ["512 ml/min", "6000 ml/min", "4166 ml/min", "41.7 ml/min"], "a": "B", "e": "MRV = TV x respirations per minute = 500 x 12 = 6000 ml/min."}, {"q": "VC = 4500 ml, TV = 500 ml, ERV = 1000 ml. IRV =", "c": ["3000 ml", "3500 ml", "5500 ml", "4000 ml"], "a": "A", "e": "IRV = VC - (TV + ERV) = 4500 - 1500 = 3000 ml."}, {"q": "A markedly reduced vital capacity most suggests", "c": ["normal lungs", "restrictive disease with stiff, low-compliance lungs", "increased surfactant", "a larger residual volume only"], "a": "B", "e": "Clinical significance of VC: low VC = lungs cannot expand fully (fibrosis, restrictive disease, weak respiratory muscles)."}, {"q": "Hypoventilation (slow, shallow breathing) causes blood", "c": ["CO2 to fall and pH to rise", "CO2 to rise and pH to fall", "CO2 and pH to both rise", "no change"], "a": "B", "e": "Retained CO2 makes carbonic acid (CO2 + H2O to H2CO3 to H+ + HCO3-), so pH drops: respiratory acidosis."}, {"q": "The second heart sound (dup) is caused by", "c": ["AV valves closing", "semilunar valves closing", "atria contracting", "ventricles filling"], "a": "B", "e": "S2 = semilunar (aortic, pulmonary) valves closing at the start of ventricular diastole."}, {"q": "During isovolumetric contraction", "c": ["only the AV valves are open", "only the semilunar valves are open", "all four valves are closed", "all four valves are open"], "a": "C", "e": "Ventricles squeeze with all valves shut until pressure exceeds the arteries and the SL valves open."}, {"q": "The mitral valve is best heard at the", "c": ["2nd intercostal space, right sternal border", "2nd intercostal space, left sternal border", "5th intercostal space, left midclavicular line (apex)", "xiphoid process"], "a": "C", "e": "Aortic = 2nd ICS right; pulmonary = 2nd ICS left; tricuspid = 5th ICS near the sternum; mitral = apex, 5th ICS left midclavicular line."}, {"q": "Which layer of the alimentary canal contains the blood vessels, nerves and (in the duodenum) glands?", "c": ["Mucosa", "Submucosa", "Muscularis externa", "Serosa"], "a": "B", "e": "Submucosa: dense connective tissue with vessels, nerve plexus, lymphoid tissue and glands."}, {"q": "The stomach is unique because its muscularis externa has an extra", "c": ["circular layer", "oblique layer", "longitudinal layer", "transverse layer"], "a": "B", "e": "Oblique (innermost) layer lets the stomach churn."}, {"q": "Which tooth has the job of tearing and grasping?", "c": ["Incisor", "Canine", "Premolar", "Molar"], "a": "B", "e": "Incisors cut, canines tear, premolars and molars grind. Adult per quadrant: 2-1-2-3 = 32."}, {"q": "The lobe of the liver that sits next to the gall bladder on the inferior surface is the", "c": ["caudate lobe", "quadrate lobe", "left lobe", "right lobe"], "a": "B", "e": "Quadrate = next to the gall bladder; caudate = posterior, next to the inferior vena cava."}, {"q": "Bile leaving the gall bladder travels through the", "c": ["cystic duct, then common bile duct", "common hepatic duct, then cystic duct", "main pancreatic duct", "accessory pancreatic duct"], "a": "A", "e": "Gall bladder to cystic duct to common bile duct to hepatopancreatic ampulla to major duodenal papilla."}, {"q": "The fold that suspends the jejunum and ileum from the posterior abdominal wall is the", "c": ["greater omentum", "lesser omentum", "mesentery proper", "mesocolon"], "a": "C", "e": "Mesentery proper. Mesocolon holds the colon; omenta hang off the stomach."}, {"q": "Haustra are produced by the tone of the", "c": ["circular folds", "taenia coli", "rugae", "villi"], "a": "B", "e": "Three longitudinal muscle bands (taenia coli) pucker the colon into haustra."}, {"q": "Which structure regulates passage of material from the small intestine into the large intestine?", "c": ["Pyloric sphincter", "Ileocecal valve", "Gastroesophageal sphincter", "Hepatopancreatic sphincter"], "a": "B", "e": "The ileocecal valve sits between the ileum and the cecum."}, {"q": "A slide shows villi AND large blue lymphoid follicles in the submucosa. It is", "c": ["duodenum", "ileum", "colon", "stomach"], "a": "B", "e": "Peyer patches = ileum."}, {"q": "A slide shows villi AND pale mucous glands in the submucosa. It is", "c": ["duodenum", "ileum", "jejunum", "esophagus"], "a": "A", "e": "Duodenal (Brunner's) glands = duodenum."}, {"q": "A GI slide has no villi, and straight crypts full of goblet cells. It is", "c": ["stomach", "colon", "ileum", "esophagus"], "a": "B", "e": "Colon. Stomach also lacks villi but has gastric pits and pink parietal cells, no goblet cells."}, {"q": "Parietal cells of the stomach secrete", "c": ["pepsinogen", "HCl and intrinsic factor", "mucus only", "gastrin"], "a": "B", "e": "Parietal = HCl + intrinsic factor (pale pink, fried-egg look). Chief = pepsinogen (dark purple, gland base)."}, {"q": "Which epithelium lines the esophagus?", "c": ["Simple columnar", "Pseudostratified ciliated columnar", "Stratified squamous", "Simple squamous"], "a": "C", "e": "Stratified squamous protects against abrasion from the bolus."}, {"q": "Bronchioles differ from bronchi because bronchioles", "c": ["have cartilage plates", "lack cartilage and have a prominent smooth muscle layer", "are lined by stratified squamous epithelium", "have no lumen"], "a": "B", "e": "No cartilage, more smooth muscle, simpler epithelium."}, {"q": "In tube 4A, amylase was boiled before starch was added. The expected IKI result is", "c": ["negative, yellow", "positive, blue-black", "positive, orange precipitate", "negative, pink"], "a": "B", "e": "Denatured amylase cannot digest starch, so starch remains: IKI positive."}, {"q": "Which tube is the positive control for the Benedict's test?", "c": ["1A", "2A", "3A", "5A"], "a": "C", "e": "3A contains maltose, so it shows what a positive Benedict's looks like."}, {"q": "Tube 6A (amylase + starch at 0 C) most likely shows", "c": ["IKI negative, Benedict's positive", "IKI positive, Benedict's negative", "both negative", "both positive"], "a": "B", "e": "Cold slows enzyme activity, so starch remains and little maltose forms."}, {"q": "Why must the Benedict's test tubes be placed in boiling water?", "c": ["To denature the enzyme only", "Benedict's reagent needs heat to react with reducing sugars", "To dissolve the starch", "To turn the iodine black"], "a": "B", "e": "Benedict's is a heat-dependent test for reducing sugars like maltose."}, {"q": "Tube 4B turned pink faster than 4L because", "c": ["bile is a lipase", "bile salts emulsify fat, increasing surface area for lipase", "bile lowers the temperature", "bile adds acid to the tube"], "a": "B", "e": "Bile is not an enzyme; it physically breaks fat into droplets."}, {"q": "In the lipase experiment, acetic acid is added to 1L and 2L to", "c": ["start digestion", "make a pink color reference (color control)", "denature lipase", "emulsify the fat"], "a": "B", "e": "Gives the 'what does acidic look like' comparison color."}, {"q": "The independent variable when comparing tubes 4L (37 C) and 5L (0 C) is", "c": ["color of litmus", "incubation temperature", "amount of pancreatin", "incubation time"], "a": "B", "e": "The thing you changed on purpose. Color is the dependent variable; amount and time are controlled."}, {"q": "Which statement about the 0 C tubes is correct?", "c": ["The enzyme is permanently denatured", "Enzyme activity is slowed but the enzyme is not destroyed", "The enzyme works faster", "The substrate is destroyed"], "a": "B", "e": "Cold slows molecular motion; boiling denatures (permanent shape change)."}, {"q": "Trypsin and lipase both come from the", "c": ["salivary glands", "stomach", "pancreas", "liver"], "a": "C", "e": "Pancreatin = the pancreas's enzyme mix."}], "respFunc": [["Nasal cavity", "Warms, moistens and filters incoming air; mucous membrane traps debris"], ["Nasal conchae (superior, middle, inferior)", "Bony shelves that create turbulence so air contacts more mucosa: increases warming, humidifying and filtering"], ["Paranasal sinuses (frontal, maxillary, sphenoid, ethmoid)", "Lighten the skull, warm and moisten air, add resonance to the voice; drain into the nasal cavity"], ["Cribiform plate of ethmoid bone", "Roof of the nasal cavity; holes let olfactory nerve fibers pass to the brain (smell)"], ["Opening of pharyngotympanic tube", "Connects nasopharynx to the middle ear; equalizes pressure"], ["Nasopharynx", "Air only passageway; closed off by the soft palate and uvula during swallowing"], ["Oropharynx / Laryngopharynx", "Shared passageway for air AND food"], ["Pharyngeal tonsils (adenoids)", "Lymphoid tissue in posterior nasopharynx; immune defense"], ["Palatine tonsils", "Lymphoid tissue in the lateral oropharynx; immune defense"], ["Lingual tonsils", "Lymphoid tissue at base of the tongue; immune defense"], ["Uvula / soft palate", "Rise during swallowing to close the nasopharynx so food does not enter the nose"], ["Hyoid bone", "Not part of the larynx; anchors the larynx and tongue muscles"], ["Larynx", "Air passageway, keeps food out of the airway, houses the vocal folds (voice production)"], ["Epiglottis", "Elastic cartilage flap that covers the glottis/laryngeal inlet during swallowing"], ["Thyroid cartilage", "Largest laryngeal cartilage (Adam's apple); shields the vocal folds"], ["Cricoid cartilage", "Complete ring below the thyroid cartilage; connects larynx to trachea"], ["Vocal folds (true vocal cords)", "Vibrate as air passes to produce sound"], ["Vestibular folds (false vocal cords)", "Superior to vocal folds; help close the glottis during swallowing; no sound"], ["Glottis", "The vocal folds plus the opening (rima glottidis) between them"], ["Trachea", "Conducts air to bronchi; C-shaped hyaline cartilage rings keep it open; cilia sweep mucus up (mucociliary escalator)"], ["Carina", "Ridge where the trachea splits into the two primary bronchi; very sensitive, triggers the cough reflex"], ["Primary / secondary / tertiary bronchi", "Branching conducting tubes into each lung / each lobe / each bronchopulmonary segment"], ["Bronchioles", "Small airways (<1 mm) with no cartilage; smooth muscle controls airflow (bronchoconstriction / dilation)"], ["Alveoli", "Site of gas exchange; simple squamous (type I) cells plus surfactant-making type II cells"], ["Visceral pleura", "Serous membrane covering the lung surface"], ["Parietal pleura", "Serous membrane lining the thoracic wall and diaphragm; pleural fluid between the two reduces friction"], ["Pulmonary arteries", "Carry deoxygenated blood from the right ventricle to the lungs"], ["Cardiac notch", "Indent in the LEFT lung's superior lobe where the heart sits"], ["Fissures", "Divide lungs into lobes: right has horizontal + oblique (3 lobes), left has only oblique (2 lobes)"]], "digFunc": [["Tongue", "Mixes food with saliva, forms the bolus, starts swallowing; taste buds"], ["Teeth: incisors / canines / premolars / molars", "Biting and cutting / tearing and grasping / grinding / grinding (mechanical digestion)"], ["Parotid, submandibular, sublingual glands (and ducts)", "Make saliva (salivary amylase starts starch digestion; mucus moistens food). Parotid duct opens by the upper 2nd molar; submandibular and sublingual ducts open in the floor of the mouth"], ["Esophagus", "Propulsion: carries the bolus to the stomach by peristalsis (no digestion of its own)"], ["Gastroesophageal sphincter", "Closes to prevent reflux of stomach contents into the esophagus"], ["Stomach: cardia / fundus / body / pylorus", "Cardia receives food; fundus holds food and gas; body is the main mixing and storage region; pylorus funnels chyme toward the duodenum"], ["Rugae", "Folds of the gastric mucosa that let the stomach expand when full"], ["Pyloric sphincter", "Controls emptying of chyme into the duodenum"], ["Duodenum", "First part of small intestine; receives bile and pancreatic juice; main site of chemical digestion"], ["Major duodenal papilla", "Opening where the hepatopancreatic ampulla empties bile + pancreatic juice into the duodenum"], ["Jejunum", "Middle small intestine; most nutrient absorption"], ["Ileum", "Last small intestine; absorbs B12 and bile salts; has Peyer patches"], ["Circular folds (plicae circulares)", "Permanent folds of mucosa + submucosa: increase surface area and slow chyme for mixing"], ["Villi / microvilli", "Increase absorptive surface area"], ["Ileocecal valve", "Controls entry of ileal contents into the cecum and prevents backflow"], ["Cecum / appendix", "Cecum is the first pouch of the large intestine; appendix is lymphoid tissue (immune)"], ["Colon (ascending, transverse, descending, sigmoid)", "Absorbs water and electrolytes, forms and stores feces, houses gut bacteria"], ["Haustra", "Pouches of the colon wall; allow expansion and mix contents (haustral contractions)"], ["Taenia coli", "Three bands of longitudinal smooth muscle; their tone bunches the colon into haustra"], ["Rectum / anus / anal sphincters", "Store and expel feces; internal sphincter is involuntary (smooth), external is voluntary (skeletal)"], ["Liver", "Makes bile, processes nutrients, detoxifies, stores glycogen and vitamins, makes plasma proteins"], ["Gall bladder", "Stores and concentrates bile; releases it through the cystic duct"], ["Pancreas (head, body, tail)", "Exocrine: pancreatic juice with digestive enzymes (amylase, trypsin, lipase) + bicarbonate. Endocrine: insulin, glucagon"], ["Main / accessory pancreatic duct", "Carry pancreatic juice to the duodenum (main joins the common bile duct at the ampulla)"], ["Mucosa / submucosa / muscularis externa / serosa", "Mucosa absorbs and secretes; submucosa carries vessels, nerves, glands; muscularis externa does peristalsis and segmentation; serosa is the outer protective visceral peritoneum"], ["Parietal / visceral peritoneum", "Parietal lines the abdominal wall; visceral covers organ surfaces"], ["Greater omentum", "Fatty apron hanging from the greater curvature over the intestines: fat storage, insulation, immune protection"], ["Lesser omentum", "Connects the lesser curvature of the stomach and duodenum to the liver; carries vessels and ducts"], ["Mesentery proper", "Fan-shaped fold that suspends the jejunum and ileum from the posterior abdominal wall"], ["Mesocolon", "Attaches the (transverse and sigmoid) colon to the posterior abdominal wall"]], "muscles": [["Diaphragm", "Quiet AND forced inspiration (primary)", "Contracts and flattens (moves down), increasing the vertical height of the thoracic cavity"], ["External intercostals", "Quiet AND forced inspiration (primary)", "Lift the rib cage up and out, increasing the width (lateral and AP size) of the thoracic cavity"], ["Sternocleidomastoid", "Forced inspiration (accessory)", "Elevates the sternum"], ["Scalenes", "Forced inspiration (accessory)", "Elevate and fix the first two ribs"], ["Pectoralis minor (and major), Serratus anterior", "Forced inspiration (accessory)", "Elevate the ribs when the scapula/arm is fixed"], ["Erector spinae", "Forced inspiration (accessory)", "Extend the back, straightening the thoracic curvature to enlarge the thorax"], ["Abdominals (rectus abdominis, transversus abdominis, internal oblique, external oblique)", "Forced expiration", "Compress abdominal contents, pushing the diaphragm up, and depress the lower ribs"], ["Internal intercostals", "Forced expiration", "Pull the ribs down and in, decreasing thoracic volume"]], "volumes": [["Tidal volume", "TV", "Air inhaled or exhaled with each breath under resting conditions", "500 ml", "500 ml", ""], ["Inspiratory reserve volume", "IRV", "Air that can be forcefully inhaled after a normal tidal inspiration", "3100 ml", "1900 ml", ""], ["Expiratory reserve volume", "ERV", "Air that can be forcefully exhaled after a normal tidal expiration", "1200 ml", "700 ml", ""], ["Residual volume", "RV", "Air remaining in the lungs after a forced expiration (cannot be measured by spirometer)", "1200 ml", "1100 ml", ""], ["Total lung capacity", "TLC", "Maximum air in the lungs after a maximum inspiratory effort", "6000 ml", "4200 ml", "TV + IRV + ERV + RV"], ["Vital capacity", "VC", "Maximum air that can be expired after a maximum inspiratory effort", "4800 ml", "3100 ml", "TV + IRV + ERV"], ["Inspiratory capacity", "IC", "Maximum air that can be inspired after a normal tidal expiration", "3600 ml", "2400 ml", "TV + IRV"], ["Functional residual capacity", "FRC", "Air remaining in the lungs after a normal tidal expiration", "2400 ml", "1800 ml", "ERV + RV"]], "histo": [["Trachea", "Neck to mid-thorax; larynx to the carina, anterior to the esophagus", "Conducts air; warms, humidifies and cleans it (mucociliary escalator)", "Pseudostratified ciliated columnar epithelium with goblet cells ON TOP of a big C-shaped ring of hyaline cartilage (purple-blue matrix, cells sitting in lacunae); sero-mucous glands in the submucosa", "Esophagus: also a tube with glands, but has stratified squamous epithelium and thick muscle, NO cartilage", "Pseudostratified columnar epithelium, tracheal cartilage, sero-mucous glands"], ["Lung", "Thoracic cavity, inside the pleural sacs", "Gas exchange between alveolar air and pulmonary capillary blood", "Lacy, mostly-empty 'sponge' of thin-walled alveoli (simple squamous) with capillaries and RBCs in the walls. Bronchi have cartilage plates + pseudostratified epithelium; bronchioles have NO cartilage, simple columnar/cuboidal epithelium and a ring of smooth muscle", "Bronchus vs bronchiole: cartilage plates = bronchus; no cartilage + smooth muscle ring = bronchiole", "Alveoli, bronchi, bronchiole, simple squamous epithelium, smooth muscle, capillaries"], ["Esophagus", "Posterior to the trachea, pharynx to stomach", "Propulsion of the bolus by peristalsis; epithelium resists abrasion", "Thick stratified squamous (non-keratinized) epithelium lining a folded, star-shaped lumen; esophageal (mucous) glands; thick muscularis externa; outer adventitia (no serosa in the thorax)", "Trachea (see above). Any GI organ with simple columnar epithelium is NOT esophagus", "Mucosa, muscularis mucosa, submucosa, stratified squamous epithelium, esophageal glands, muscularis externa"], ["Stomach (fundic)", "Left upper quadrant, between esophagus and duodenum", "Storage, churning, starts protein digestion (HCl + pepsin)", "Simple columnar epithelium of all mucus cells (NO goblet cells, NO villi); surface dotted with gastric pits leading into long gastric glands. Parietal cells = pale pink, round 'fried eggs' (HCl, intrinsic factor), more superficial; chief cells = dark purple/blue at the gland base (pepsinogen)", "Colon: also no villi, but colon crypts are straight tubes packed with white goblet cells and no pink parietal cells", "Simple columnar epithelial cells, chief cells, parietal cells, gastric pits, lamina propria, gastric glands"], ["Duodenum", "First ~25 cm of small intestine, C-shaped around the pancreas head", "Chemical digestion; receives bile and pancreatic juice", "Villi + duodenal (Brunner's) glands in the SUBMUCOSA (pale mucous glands below the crypts; their alkaline mucus neutralizes acid chyme)", "Ileum: villi too, but has Peyer patches instead of Brunner's glands", "(not a drawing slide)"], ["Small intestine (ileum)", "Lower right abdomen; ends at the ileocecal valve", "Nutrient absorption (finishes digestion, absorbs B12 and bile salts); immune surveillance", "Finger-like VILLI (simple columnar with goblet cells) plus PEYER PATCHES: large, round, blue lymphoid follicles in the mucosa/submucosa", "Duodenum (Brunner's glands) and colon (no villi)", "Villi, Peyer patches, mucosa, muscularis mucosa, submucosa, muscularis externa"], ["Large intestine (colon)", "Frames the abdomen: ascending, transverse, descending, sigmoid", "Absorbs water and electrolytes; mucus lubricates feces", "NO villi: flat surface with straight, deep intestinal crypts packed with goblet cells (look like white empty holes / 'bubble wrap')", "Stomach (see above) and small intestine (has villi)", "Intestinal crypts, goblet cells, mucosa, muscularis mucosa, submucosa, muscularis externa"]], "histoOther": [["Taste buds (#40)", "Pale, barrel / onion-shaped clusters of cells embedded in the stratified squamous epithelium on the side walls of tongue papillae (vallate papillae)."], ["Tooth (#61, 62)", "Enamel (outer, often lost in prep), dentin (tubular, pink), pulp cavity in the center with vessels and nerves; root in the alveolar socket held by periodontal ligament."], ["Salivary gland (#63)", "Clusters of acini: serous acini stain dark (enzyme-producing); mucous acini are pale and foamy; serous demilunes cap mucous acini (submandibular = mixed). Ducts lined by cuboidal cells."], ["Liver (#71)", "Hexagonal lobules with a central vein in the middle, plates of hepatocytes radiating out with sinusoids between them, and portal triads (portal arteriole, portal venule, bile duct) at the corners."], ["Stomach composite (#66) / fundic stomach (#65)", "Same diagnostic as stomach above: gastric pits, gastric glands, pink parietal cells, purple chief cells."]], "enzymes": [["Salivary amylase", "Salivary glands (pancreatic amylase too)", "Starch (polysaccharide)", "Maltose (disaccharide)", "Lugol's iodine (IKI) for starch; Benedict's for maltose", "IKI blue-black = starch present. Benedict's green/orange/red after boiling = sugar present", "37 C, ~pH 7"], ["Trypsin", "Pancreas", "Proteins (lab uses BAPNA, a synthetic substrate)", "Peptides (lab: yellow dye released)", "No reagent needed: watch for yellow", "Clear to yellow = BAPNA hydrolyzed", "37 C, ~pH 8"], ["Pancreatic lipase (in pancreatin)", "Pancreas", "Fats / triglycerides (lab: litmus cream)", "Monoglycerides + 2 fatty acids", "Litmus (pH indicator) in the cream", "Blue to pink = fatty acids made, pH dropped", "37 C, ~pH 8, works faster with bile"], ["Bile salts (NOT an enzyme)", "Liver, stored in gall bladder", "Large fat globules", "Tiny fat droplets (emulsion)", "Look at where the oil is", "Oil dispersed throughout the water = emulsified", "Physical, not chemical"]], "amylase": [["1A", "Amylase + water", "37 C", "Yellow-brown (no change)", "-", "Blue (no change)", "-", "Enzyme control: amylase alone has no starch or sugar"], ["2A", "Starch + water", "37 C", "Blue-black", "+", "Blue", "-", "Substrate control: starch is not broken down without enzyme; positive control for IKI"], ["3A", "Maltose + water", "37 C", "Yellow-brown", "-", "Green / orange / red", "+", "Positive control for Benedict's: shows what 'sugar present' looks like"], ["4A", "BOILED amylase + starch", "37 C", "Blue-black", "+", "Blue", "-", "Boiling denatured amylase, so starch stays undigested"], ["5A", "Amylase + starch", "37 C", "Yellow-brown", "-", "Green / orange / red", "+", "Experimental: optimal temperature, starch digested to maltose"], ["6A", "Amylase + starch", "0 C", "Blue-black", "+", "Blue (or faint)", "-", "Cold slows the enzyme: little or no digestion (not denatured, just slow)"]], "trypsin": [["1T", "Trypsin + water", "37 C", "Clear / colorless", "-", "Enzyme control: no substrate, no yellow"], ["2T", "BAPNA + water", "37 C", "Clear / colorless", "-", "Substrate control: BAPNA does not break down on its own"], ["3T", "BOILED trypsin + BAPNA", "37 C", "Clear / colorless", "-", "Boiling denatured trypsin"], ["4T", "Trypsin + BAPNA", "37 C", "YELLOW", "+", "Experimental: trypsin cleaved BAPNA, releasing yellow dye"], ["5T", "Trypsin + BAPNA", "0 C", "Clear (or faint yellow)", "-", "Cold slows the enzyme"]], "bile": [["1E", "Water + vegetable oil", "Oil floats as a layer on the surface", "-"], ["2E", "Water + oil + bile salts", "Oil broken into tiny droplets suspended throughout", "+"]], "lipase": [["1L", "Pancreatin + water", "37 C", "Pink (only because acetic acid was added)", "-", "Color control: shows what acid/pink looks like; no fat to digest"], ["2L", "Litmus cream + water", "37 C", "Blue (pink after acetic acid added)", "-", "Substrate control: cream does not change without lipase"], ["3L", "BOILED pancreatin + litmus cream", "37 C", "Blue", "-", "Boiling denatured lipase"], ["4L", "Pancreatin + litmus cream", "37 C", "Pink", "+", "Experimental: lipase made fatty acids, pH dropped"], ["5L", "Pancreatin + litmus cream", "0 C", "Blue", "-", "Cold slows the enzyme"], ["4B", "Pancreatin + litmus cream + bile salts", "37 C", "Pink (fastest / most pink)", "+", "Bile emulsified the fat, giving lipase more surface area"], ["5B", "Pancreatin + litmus cream + bile salts", "0 C", "Blue", "-", "Bile cannot rescue an enzyme slowed by cold"]], "vars": [["Activity 1: Amylase", "Temperature / enzyme condition (37 C vs 0 C vs boiled)", "Color change in the Lugol's iodine (IKI) test AND the Benedict's test (presence of starch / maltose)", "Drops of each solution (3 each), incubation time (1 hour), same reagents, same amount of indicator", "1A, 2A, 3A (controls); 4A-6A experimental"], ["Activity 2: Trypsin", "Temperature / enzyme condition (37 C vs 0 C vs boiled)", "Color change: clear to yellow (hydrolysis of BAPNA)", "Drops of each solution (3 each), incubation time, total volume", "1T, 2T (controls); 3T-5T experimental"], ["Activity 3a: Bile", "Presence or absence of bile salts", "Location of the oil: floating layer vs dispersed droplets (emulsification)", "Amount of water (20 drops) and oil (4 drops), shaking, standing time (10-15 min)", "1E is the control"], ["Activity 3b: Lipase", "Temperature / enzyme condition, and presence of bile salts (4B, 5B)", "Color change of the litmus: blue to pink (fatty acids lower pH)", "Incubation time, amount of pancreatin (5 drops), amount of litmus cream (5 drops), total volume", "1L, 2L (controls); 3L-5L, 4B, 5B experimental"]], "airIn": ["Nasal cavity", "Nasopharynx", "Oropharynx", "Laryngopharynx", "Larynx (through the glottis)", "Trachea", "Carina (split point)", "R / L Primary bronchus", "Secondary (lobar) bronchi", "Tertiary (segmental) bronchi", "Bronchioles", "Terminal bronchioles", "Respiratory bronchioles", "Alveolar ducts", "Alveolar sacs", "Alveoli"], "food": ["Mouth (oral cavity)", "Oropharynx", "Laryngopharynx", "Esophagus", "Gastroesophageal sphincter", "Stomach: cardia", "Fundus / body", "Pylorus", "Pyloric sphincter", "Duodenum", "Jejunum", "Ileum", "Ileocecal valve", "Cecum (appendix hangs off it)", "Ascending colon", "Transverse colon", "Descending colon", "Sigmoid colon", "Rectum", "Anal canal / anal sphincters", "Anus"], "bileFlow": ["Liver (hepatocytes make bile)", "R / L hepatic ducts", "Common hepatic duct", "joins the cystic duct (two-way road to and from the gall bladder)", "Common bile duct", "meets the Main pancreatic duct", "Hepatopancreatic ampulla", "Hepatopancreatic sphincter", "Major duodenal papilla", "Duodenum"]};</script>
+<script>
+(function () {
+"use strict";
+var D = window.DATA;
+var $ = function (s, r) { return (r || document).querySelector(s); };
+var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+var shuffle = function (a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+var main = $("#main");
+
+/* ---------- storage (per-browser convenience only) ---------- */
+var KEY = "labex2-missed-v1";
+var missed = {};
+try { missed = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { missed = {}; }
+function saveMissed() { try { localStorage.setItem(KEY, JSON.stringify(missed)); } catch (e) {} updateStats(); }
+var session = { right: 0, total: 0 };
+function mark(id, ok, info) {
+  session.total++; if (ok) session.right++;
+  if (ok) { if (missed[id]) { missed[id].streak = (missed[id].streak || 0) + 1; if (missed[id].streak >= 2) delete missed[id]; } }
+  else { missed[id] = Object.assign({ streak: 0, t: Date.now() }, info); }
+  saveMissed();
+}
+function updateStats() {
+  var n = Object.keys(missed).length;
+  $("#s-score").textContent = session.right + "/" + session.total;
+  $("#s-miss").textContent = n;
+  var tm = $("#tab-miss"); tm.textContent = n; tm.hidden = n === 0;
+}
+
+/* ---------- answer checking ---------- */
+function norm(s) { return String(s).toLowerCase().replace(/[’']/g, "").replace(/[^a-z0-9]+/g, " ").trim(); }
+function variants(term) {
+  var out = [term];
+  var base = term.split(" (")[0]; out.push(base);
+  var m = term.match(/\(([^)]+)\)/g); if (m) m.forEach(function (p) { out.push(p.slice(1, -1)); });
+  base.split(/\s*\/\s*/).forEach(function (p) { if (p.length > 3) out.push(p); });
+  base.split(":").forEach(function (p) { if (p.trim().length > 3) out.push(p); });
+  return out.map(norm).filter(function (x) { return x.length > 1; });
+}
+function lev(a, b) {
+  var m = a.length, n = b.length, d = [], i, j;
+  for (i = 0; i <= m; i++) { d[i] = [i]; }
+  for (j = 1; j <= n; j++) d[0][j] = j;
+  for (i = 1; i <= m; i++) for (j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[m][n];
+}
+function grade(input, term) {
+  var x = norm(input); if (!x) return "no";
+  var vs = variants(term), best = 99;
+  for (var i = 0; i < vs.length; i++) {
+    var v = vs[i];
+    if (x === v || x === v.replace(/s$/, "") || x + "s" === v || x === v + "s") return "ok";
+    best = Math.min(best, lev(x, v));
+  }
+  return best <= 2 ? "close" : "no";
+}
+
+/* ---------- router ---------- */
+var VIEWS = { figures: viewFigures, histology: viewHistology, experiment: viewExperiment, quiz: viewQuiz, cards: viewCards, review: viewReview };
+function route() {
+  var h = (location.hash || "").replace("#", "");
+  if (!VIEWS[h]) h = "figures";
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) { t.setAttribute("aria-selected", t.dataset.view === h ? "true" : "false"); });
+  main.innerHTML = "";
+  VIEWS[h]();
+  try { localStorage.setItem("labex2-view", h); } catch (e) {}
+}
+Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) {
+  t.addEventListener("click", function () { if (location.hash === "#" + t.dataset.view) route(); else location.hash = t.dataset.view; });
+});
+window.addEventListener("hashchange", route);
+
+/* =========================================================
+   FIGURES
+   ========================================================= */
+var FS = { fig: 0, mode: "choose", tagOnly: true, order: [], pos: 0, results: {}, drill: null, pendingPin: null };
+function figPins(f) {
+  return f.pins.map(function (p, i) { return i; }).filter(function (i) { return !FS.tagOnly || f.pins[i].tag; });
+}
+function startFig(idx, keepPin) {
+  FS.fig = idx; FS.results = {}; FS.drill = null;
+  var f = D.figs[idx];
+  FS.order = shuffle(figPins(f)); FS.pos = 0;
+  if (keepPin != null) { var k = FS.order.indexOf(keepPin); if (k > 0) { FS.order.splice(k, 1); FS.order.unshift(keepPin); } else if (k < 0) FS.order.unshift(keepPin); }
+}
+function startDrill(list) {
+  FS.drill = shuffle(list); FS.pos = 0; FS.results = {};
+}
+function curItem() {
+  if (FS.drill) { var d = FS.drill[FS.pos]; return d ? { fi: d[0], pi: d[1] } : null; }
+  var p = FS.order[FS.pos]; return p == null ? null : { fi: FS.fig, pi: p };
+}
+function viewFigures() {
+  if (!FS.order.length && !FS.drill) startFig(0);
+  var opts = "", sec = null;
+  D.figs.forEach(function (f, i) {
+    if (f.sec !== sec) { if (sec) opts += "</optgroup>"; sec = f.sec; opts += '<optgroup label="' + esc(sec) + '">'; }
+    opts += '<option value="' + i + '">F' + f.num + " · " + esc(f.title) + " (" + f.pins.length + ")</option>";
+  });
+  opts += "</optgroup>";
+  main.innerHTML =
+    '<div class="view-head"><div><div class="eyebrow">Part A practice</div><h2>Name the pinned structure</h2>' +
+    '<p>Every figure Dr. Rai posted, with each leader line turned into a numbered pin. Green check marks show answers that were graded on your own quizzes.</p></div></div>' +
+    '<div class="fig-tools">' +
+      '<select class="pick" id="fig-pick" aria-label="Choose a figure">' + opts + "</select>" +
+      '<button class="btn" id="fig-prev" aria-label="Previous figure">&#8592;</button><button class="btn" id="fig-next" aria-label="Next figure">&#8594;</button>' +
+      '<div class="seg" role="group" aria-label="Mode"><button data-m="choose">Choose</button><button data-m="type">Type</button><button data-m="study">Study</button></div>' +
+      '<label class="tog"><input type="checkbox" id="fig-tag"> Tag list only</label>' +
+      '<button class="btn ghost" id="fig-drill">Mixed drill</button>' +
+    "</div>" +
+    '<div class="fig-layout"><div class="panel stage" id="stage"></div><div class="panel ask" id="ask"></div></div>';
+  $("#fig-pick").value = FS.fig;
+  $("#fig-tag").checked = FS.tagOnly;
+  $("#fig-pick").addEventListener("change", function () { startFig(+this.value); renderFig(); });
+  $("#fig-prev").addEventListener("click", function () { startFig((FS.fig - 1 + D.figs.length) % D.figs.length); $("#fig-pick").value = FS.fig; renderFig(); });
+  $("#fig-next").addEventListener("click", function () { startFig((FS.fig + 1) % D.figs.length); $("#fig-pick").value = FS.fig; renderFig(); });
+  $("#fig-tag").addEventListener("change", function () { FS.tagOnly = this.checked; FS.drill ? startDrill(allPins()) : startFig(FS.fig); renderFig(); });
+  $("#fig-drill").addEventListener("click", function () { startDrill(allPins()); renderFig(); });
+  Array.prototype.forEach.call(document.querySelectorAll(".seg button[data-m]"), function (b) {
+    b.addEventListener("click", function () { FS.mode = b.dataset.m; renderFig(); });
+  });
+  renderFig();
+}
+function allPins() {
+  var out = [];
+  D.figs.forEach(function (f, fi) { figPins(f).forEach(function (pi) { out.push([fi, pi]); }); });
+  return out;
+}
+function renderFig() {
+  Array.prototype.forEach.call(document.querySelectorAll(".seg button[data-m]"), function (b) { b.setAttribute("aria-pressed", b.dataset.m === FS.mode ? "true" : "false"); });
+  var it = curItem();
+  var fi = it ? it.fi : FS.fig, f = D.figs[fi];
+  if (FS.drill && it) { FS.fig = fi; var pk = $("#fig-pick"); if (pk) pk.value = fi; }
+  var total = FS.drill ? FS.drill.length : FS.order.length;
+  var pins = f.pins.map(function (p, i) {
+    var cls = "pin", key = fi + ":" + i;
+    if (FS.mode === "study") cls += " study";
+    else if (FS.results[key] === true) cls += " right";
+    else if (FS.results[key] === false) cls += " wrong";
+    if (FS.mode !== "study" && it && it.pi === i && FS.results[key] == null) cls += " cur";
+    var dim = FS.tagOnly && !p.tag ? ";opacity:.35" : "";
+    return '<button class="' + cls + '" style="left:' + p.x + "%;top:" + p.y + "%" + dim + '" data-i="' + i + '" aria-label="Pin ' + (i + 1) + '">' + (i + 1) + "</button>";
+  }).join("");
+  $("#stage").innerHTML =
+    '<div class="stage-title"><h3>F' + f.num + " · " + esc(f.title) + '</h3><span class="meta">' + esc(f.sec) + (FS.drill ? " · mixed drill" : "") + "</span></div>" +
+    '<div class="canvas" id="canvas"><img src="img/fig/' + f.id + '.jpg" alt="' + esc(f.title) + '" width="' + f.w + '" height="' + f.h + '">' + pins + "</div>" +
+    '<div class="legend" style="margin-top:8px"><span style="--c:#c4406b">Current pin</span><span style="--c:#1d7a4d">Right</span><span style="--c:#b3261e">Missed</span><span style="--c:#8a8496">Not yet</span></div>';
+  Array.prototype.forEach.call(document.querySelectorAll("#canvas .pin"), function (b) {
+    b.addEventListener("click", function (ev) { ev.stopPropagation(); pinTap(fi, +b.dataset.i, b); });
+  });
+  renderAsk(it, total);
+}
+function pinTap(fi, i, el) {
+  var f = D.figs[fi], p = f.pins[i];
+  var old = $("#canvas .tip"); if (old) old.remove();
+  if (FS.mode === "study" || FS.results[fi + ":" + i] != null) {
+    var t = document.createElement("div"); t.className = "tip";
+    t.style.left = Math.min(Math.max(p.x, 14), 86) + "%"; t.style.top = p.y + "%";
+    t.textContent = (i + 1) + ". " + p.t + (p.tag ? "" : " (not on tag list)");
+    $("#canvas").appendChild(t);
+    setTimeout(function () { if (t.parentNode) t.remove(); }, 3200);
+  } else if (!FS.drill) {
+    var k = FS.order.indexOf(i);
+    if (k > FS.pos) { FS.order.splice(k, 1); FS.order.splice(FS.pos, 0, i); renderFig(); }
+  }
+}
+function distractors(fi, pi) {
+  var f = D.figs[fi], ans = f.pins[pi].t, seen = {}; seen[norm(ans)] = 1;
+  var pool = shuffle(f.pins.map(function (p) { return p.t; }));
+  var same = D.figs.filter(function (g) { return g.sec === f.sec; }).reduce(function (a, g) { return a.concat(g.pins.map(function (p) { return p.t; })); }, []);
+  pool = pool.concat(shuffle(same));
+  var out = [];
+  for (var i = 0; i < pool.length && out.length < 3; i++) { var k = norm(pool[i]); if (!seen[k]) { seen[k] = 1; out.push(pool[i]); } }
+  return shuffle(out.concat([ans]));
+}
+function renderAsk(it, total) {
+  var ask = $("#ask");
+  if (FS.mode === "study") {
+    var f = D.figs[FS.fig];
+    ask.innerHTML = '<div class="eyebrow">Study mode</div><div class="qline">Tap any pin to see its name</div>' +
+      '<ol class="small" style="margin:0;padding-left:22px;max-height:420px;overflow:auto">' +
+      f.pins.map(function (p) { return "<li style='margin-bottom:3px" + (p.tag ? ";color:var(--ink)" : "") + "'>" + esc(p.t) + (p.tag ? "" : " <i>(off list)</i>") + (p.q ? ' <span class="tagq">&#10003; quiz</span>' : "") + "</li>"; }).join("") + "</ol>";
+    return;
+  }
+  var done = Object.keys(FS.results).length;
+  var bar = '<div class="progress" aria-hidden="true"><i style="width:' + (total ? done / total * 100 : 0) + '%"></i></div>' +
+    '<div class="small">' + done + " of " + total + " answered" + (done ? " · " + Object.keys(FS.results).filter(function (k) { return FS.results[k]; }).length + " right" : "") + "</div>";
+  if (!it) {
+    var r = Object.keys(FS.results).filter(function (k) { return FS.results[k]; }).length;
+    ask.innerHTML = '<div class="eyebrow">Finished</div><div class="qline">' + r + " / " + total + " right</div>" + bar +
+      '<div class="row"><button class="btn primary" id="again">Again</button>' + (FS.drill ? "" : '<button class="btn" id="nextfig">Next figure &#8594;</button>') + "</div>" +
+      '<p class="small">Missed pins are saved under Review missed.</p>';
+    $("#again").addEventListener("click", function () { FS.drill ? startDrill(allPins()) : startFig(FS.fig); renderFig(); });
+    var nf = $("#nextfig"); if (nf) nf.addEventListener("click", function () { startFig((FS.fig + 1) % D.figs.length); $("#fig-pick").value = FS.fig; renderFig(); });
+    return;
+  }
+  var f = D.figs[it.fi], p = f.pins[it.pi];
+  var head = '<div class="eyebrow">' + (p.tag ? "Tag list term" : "Not on tag list") + (p.q ? ' · <span class="tagq">&#10003; on your quiz</span>' : "") + '</div><div class="qline">What is pin <em>' + (it.pi + 1) + "</em>?</div>";
+  if (FS.mode === "choose") {
+    var ch = distractors(it.fi, it.pi);
+    ask.innerHTML = head + '<div class="choices">' + ch.map(function (c, i) { return '<button class="choice" data-c="' + i + '">' + esc(c) + "</button>"; }).join("") + "</div>" + '<div id="fb"></div>' + bar;
+    Array.prototype.forEach.call(document.querySelectorAll("#ask .choice"), function (b) {
+      b.addEventListener("click", function () {
+        var ok = ch[+b.dataset.c] === p.t;
+        Array.prototype.forEach.call(document.querySelectorAll("#ask .choice"), function (x) { x.disabled = true; if (ch[+x.dataset.c] === p.t) x.classList.add("right"); });
+        if (!ok) b.classList.add("wrong");
+        answered(it, ok, ok ? "" : "Answer: <b>" + esc(p.t) + "</b>");
+      });
+    });
+  } else {
+    ask.innerHTML = head + '<form class="typebox" id="tf" autocomplete="off"><input id="ti" placeholder="Type the name" aria-label="Your answer" autocapitalize="off" spellcheck="false"><button class="btn primary">Check</button></form>' +
+      '<div class="row"><button class="btn ghost" id="idk">Show me</button></div><div id="fb"></div>' + bar;
+    var inp = $("#ti"); try { inp.focus({ preventScroll: true }); } catch (e) {}
+    $("#tf").addEventListener("submit", function (e) {
+      e.preventDefault(); if (inp.disabled) return;
+      var g = grade(inp.value, p.t); inp.disabled = true;
+      if (g === "close") answered(it, false, "Close, but check the spelling (the exam grades spelling exactly). Answer: <b>" + esc(p.t) + "</b>", "close");
+      else answered(it, g === "ok", g === "ok" ? "Answer: <b>" + esc(p.t) + "</b>" : "Answer: <b>" + esc(p.t) + "</b>");
+    });
+    $("#idk").addEventListener("click", function () { if (inp.disabled) return; inp.disabled = true; answered(it, false, "Answer: <b>" + esc(p.t) + "</b>"); });
+  }
+}
+function answered(it, ok, msg, kind) {
+  var key = it.fi + ":" + it.pi, f = D.figs[it.fi], p = f.pins[it.pi];
+  FS.results[key] = ok;
+  mark("pin:" + f.id + ":" + it.pi, ok, { kind: "pin", fig: it.fi, pin: it.pi, label: "F" + f.num + " pin " + (it.pi + 1), ans: p.t });
+  var fb = $("#fb");
+  fb.className = "fb " + (kind === "close" ? "close" : ok ? "ok" : "no");
+  fb.innerHTML = (ok ? "Right. " : kind === "close" ? "" : "Not quite. ") + msg;
+  var nb = document.createElement("button"); nb.className = "btn primary"; nb.textContent = "Next pin"; nb.style.marginTop = "8px"; nb.style.display = "block";
+  nb.addEventListener("click", function () { FS.pos++; renderFig(); });
+  fb.appendChild(nb); try { nb.focus({ preventScroll: true }); } catch (e) {}
+  // repaint the pin color without rebuilding the panel
+  var pinEl = document.querySelector('#canvas .pin[data-i="' + it.pi + '"]');
+  if (pinEl) { pinEl.classList.remove("cur"); pinEl.classList.add(ok ? "right" : "wrong"); }
+}
+document.addEventListener("keydown", function (e) {
+  var hh = location.hash || "#figures"; if (hh !== "#figures") return;
+  if (e.target && /INPUT|SELECT|TEXTAREA/.test(e.target.tagName)) return;
+  var n = parseInt(e.key, 10);
+  if (n >= 1 && n <= 4) { var b = document.querySelectorAll("#ask .choice")[n - 1]; if (b && !b.disabled) b.click(); }
+});
+
+/* =========================================================
+   HISTOLOGY
+   ========================================================= */
+var STATIONS = [
+  ["lung_hi", "Lung", "Thin simple squamous alveolar walls with RBCs in the capillaries; mostly empty air space."],
+  ["colon", "Large intestine (colon)", "No villi. Straight crypts packed with white goblet cells."],
+  ["esophagus", "Esophagus", "Stratified squamous epithelium lining a folded, star-shaped lumen; thick muscle; no cartilage."],
+  ["ileum", "Small intestine: ileum", "Villi plus large blue Peyer patches (lymphoid follicles)."],
+  ["trachea", "Trachea", "Pseudostratified ciliated columnar epithelium over a ring of hyaline cartilage; sero-mucous glands."],
+  ["stomach", "Stomach", "Gastric pits leading to gastric glands, pink parietal cells and dark chief cells; no villi, no goblet cells."],
+  ["duodenum", "Small intestine: duodenum", "Villi plus duodenal (Brunner's) glands in the submucosa."],
+  ["lung", "Lung", "Lacy sponge of alveoli; a bronchiole or vessel cut in cross section."],
+  ["colon_long", "Large intestine (colon)", "Flat mucosa of goblet-cell crypts, no villi, thick muscularis."]
+];
+var ORGANS = ["Trachea", "Lung", "Esophagus", "Stomach", "Small intestine: duodenum", "Small intestine: ileum", "Large intestine (colon)"];
+var HS = { order: shuffle(STATIONS.map(function (s, i) { return i; })), pos: 0 };
+var REF = [["s13_1", "Trachea"], ["s14_0", "Lung"], ["s15_3", "Lung, high power: type I and II cells"], ["s15_0", "Bronchus: cartilage plates"], ["s15_1", "Bronchiole: no cartilage"], ["s42_1", "Esophagus"], ["s41_1", "Esophagus, muscle layers"], ["s45_0", "Fundic stomach"], ["s45_1", "Stomach wall"], ["s48_0", "Duodenum"], ["s48_1", "Ileum: Peyer patches"], ["s51_0", "Colon"], ["s51_1", "Large intestine, longitudinal"]];
+var PAIRS = [
+  ["Trachea vs esophagus", "Cilia + pseudostratified + cartilage = trachea. Stratified squamous + thick muscle, no cartilage = esophagus."],
+  ["Bronchus vs bronchiole", "Cartilage plates = bronchus. No cartilage, a ring of smooth muscle, simpler epithelium = bronchiole."],
+  ["Stomach vs colon", "Neither has villi. Gastric pits with pink parietal cells = stomach. Straight crypts of goblet cells = colon."],
+  ["Duodenum vs ileum", "Both have villi. Brunner's glands in the submucosa = duodenum. Peyer patches = ileum."],
+  ["Small vs large intestine", "Villi = small intestine. No villi = large intestine."],
+  ["Esophagus vs stomach", "Stratified squamous vs simple columnar. The switch happens at the gastroesophageal junction."]
+];
+function viewHistology() {
+  main.innerHTML =
+    '<div class="view-head"><div><div class="eyebrow">Part B practice</div><h2>Microscope stations</h2>' +
+    "<p>Name the organ, then check the one feature that proves it. Histology spellings are not on the tag list, so know them cold.</p></div></div>" +
+    '<div class="histo-layout"><div class="panel scope-wrap"><div class="scope" id="scope"><img id="scope-img" alt="Unknown tissue under the microscope"></div><div class="small" id="st-count" style="text-align:center;margin-top:10px"></div></div>' +
+    '<div class="panel ask" id="hask" style="position:static"></div></div>' +
+    '<div class="section-label"><h3>Look-alike pairs</h3><span class="small">How she tests it</span></div><div class="cards" id="pairs"></div>' +
+    '<div class="section-label"><h3>Tissue cards</h3><span class="small">Location, function, diagnostic feature, drawing labels</span></div><div class="cards" id="feats"></div>' +
+    '<div class="section-label"><h3>Labeled slides</h3><span class="small">From the review PowerPoint</span></div><div class="gallery" id="gal"></div>';
+  $("#pairs").innerHTML = PAIRS.map(function (p) { return '<div class="panel" style="padding:12px 14px"><b>' + esc(p[0]) + '</b><div class="small" style="color:var(--ink);margin-top:4px">' + esc(p[1]) + "</div></div>"; }).join("");
+  $("#feats").innerHTML = D.histo.map(function (h) {
+    return '<details class="feat"><summary>' + esc(h[0]) + "</summary><dl><dt>Location</dt><dd>" + esc(h[1]) + "</dd><dt>Function</dt><dd>" + esc(h[2]) + "</dd><dt>Diagnostic feature</dt><dd>" + esc(h[3]) + "</dd><dt>Look-alike</dt><dd>" + esc(h[4]) + "</dd><dt>Drawing labels</dt><dd>" + esc(h[5]) + "</dd></dl></details>";
+  }).join("") + D.histoOther.map(function (h) { return '<details class="feat"><summary>' + esc(h[0]) + "</summary><dl><dt>Diagnostic feature</dt><dd>" + esc(h[1]) + "</dd></dl></details>"; }).join("");
+  $("#gal").innerHTML = REF.map(function (r) { return '<figure><img loading="lazy" src="img/ref/' + r[0] + '.jpg" alt="' + esc(r[1]) + ' labeled slide"><figcaption>' + esc(r[1]) + "</figcaption></figure>"; }).join("");
+  renderStation();
+}
+function renderStation() {
+  if (HS.pos >= HS.order.length) { HS.order = shuffle(HS.order); HS.pos = 0; }
+  var s = STATIONS[HS.order[HS.pos]];
+  $("#scope-img").src = "img/st/" + s[0] + ".jpg";
+  $("#st-count").textContent = "Station " + (HS.pos + 1) + " of " + HS.order.length;
+  var ask = $("#hask");
+  ask.innerHTML = '<div class="eyebrow">Station ' + (HS.pos + 1) + '</div><div class="qline">Which organ is this?</div><div class="organs">' +
+    ORGANS.map(function (o, i) { return '<button class="choice" data-o="' + i + '">' + esc(o) + "</button>"; }).join("") + '</div><div id="hfb"></div>';
+  Array.prototype.forEach.call(document.querySelectorAll("#hask .choice"), function (b) {
+    b.addEventListener("click", function () {
+      var pick = ORGANS[+b.dataset.o], ok = pick === s[1] || (s[1] === "Lung" && pick === "Lung");
+      Array.prototype.forEach.call(document.querySelectorAll("#hask .choice"), function (x) { x.disabled = true; if (ORGANS[+x.dataset.o] === s[1]) x.classList.add("right"); });
+      if (!ok) b.classList.add("wrong");
+      mark("station:" + s[0], ok, { kind: "station", label: "Station: " + s[1], ans: s[1] + ". " + s[2], st: s[0] });
+      var fb = $("#hfb"); fb.className = "fb " + (ok ? "ok" : "no");
+      fb.innerHTML = (ok ? "Right. " : "It's the <b>" + esc(s[1]) + "</b>. ") + "<span style='color:var(--ink)'>Proof: " + esc(s[2]) + "</span>";
+      var nb = document.createElement("button"); nb.className = "btn primary"; nb.textContent = "Next station"; nb.style.display = "block"; nb.style.marginTop = "8px";
+      nb.addEventListener("click", function () { HS.pos++; renderStation(); }); fb.appendChild(nb);
+    });
+  });
+}
+
+/* =========================================================
+   EXPERIMENT
+   ========================================================= */
+var COLORS = { "blue-black": "#2b2350", "yellow-brown": "#c9952e", "blue": "#3d78c9", "orange": "#e07a2a", "clear": "#eef1f6", "yellow": "#f2cf2e", "pink": "#e6739a", "oil": "#f3d878" };
+function tubeColor(desc) {
+  var d = desc.toLowerCase();
+  if (d.indexOf("blue-black") >= 0) return COLORS["blue-black"];
+  if (d.indexOf("green") >= 0 || d.indexOf("orange") >= 0) return COLORS.orange;
+  if (d.indexOf("yellow-brown") >= 0) return COLORS["yellow-brown"];
+  if (d.indexOf("yellow") >= 0) return COLORS.yellow;
+  if (d.indexOf("pink") >= 0) return COLORS.pink;
+  if (d.indexOf("blue") >= 0) return COLORS.blue;
+  return COLORS.clear;
+}
+function tubeSVG(fill) {
+  return '<svg width="40" height="96" viewBox="0 0 40 96" aria-hidden="true"><rect x="10" y="2" width="20" height="6" rx="2" fill="#b9b3c7"/>' +
+    '<path d="M11 8 V78 a9 9 0 0 0 18 0 V8" fill="#ffffff" stroke="#8a8496" stroke-width="2"/>' +
+    '<path d="M12.5 40 V78 a7.5 7.5 0 0 0 15 0 V40 Z" fill="' + fill + '"/></svg>';
+}
+var EX = { tab: "amylase" };
+var SHORT = [
+  ["What is an enzyme?", "A biological catalyst (usually a protein) that speeds a reaction by lowering activation energy without being used up. The substrate fits its active site."],
+  ["Why boil the enzyme in 4A, 3T and 3L?", "Boiling denatures the enzyme (permanent change in the active site's shape), so it cannot digest the substrate. Shows heat destroys enzyme activity."],
+  ["What does 0 C do vs boiling?", "Cold slows molecular movement, so activity is very low, but the enzyme is not denatured. Warm it up and it works again."],
+  ["Why 37 C?", "Body temperature, the optimum for human enzymes."],
+  ["Why does Benedict's need the boiling water bath?", "Benedict's reagent only reacts with reducing sugars (maltose) when heated: blue, then green, orange, red as sugar increases."],
+  ["Why does litmus cream turn pink?", "Lipase splits fat into fatty acids and monoglycerides; the acids lower the pH; litmus turns from blue to pink in acid."],
+  ["Is bile an enzyme?", "No. Bile salts emulsify (physically break up) fat into tiny droplets, increasing the surface area for lipase."],
+  ["What reaction breaks all three foods down?", "Hydrolysis: water is added to break bonds."],
+  ["Why add acetic acid to 1L and 2L?", "To make a pink color reference (color control) so you know what an acidic result looks like."]
+];
+function viewExperiment() {
+  main.innerHTML =
+    '<div class="view-head"><div><div class="eyebrow">Ex 39 lab report activities</div><h2>Predict every tube</h2>' +
+    "<p>Pick + or - for each test, then check. Results are the expected textbook results, not your group's data.</p></div></div>" +
+    '<div class="deck-list subtabs" id="ex-tabs"></div><div id="ex-body"></div>';
+  var tabs = [["amylase", "Amylase (starch)"], ["trypsin", "Trypsin (protein)"], ["bile", "Bile (emulsion)"], ["lipase", "Lipase (fat)"], ["vars", "Variables"], ["enz", "Enzyme table"], ["short", "Short answer"]];
+  $("#ex-tabs").innerHTML = tabs.map(function (t) { return '<button data-t="' + t[0] + '">' + t[1] + "</button>"; }).join("");
+  Array.prototype.forEach.call(document.querySelectorAll("#ex-tabs button"), function (b) { b.addEventListener("click", function () { EX.tab = b.dataset.t; renderEx(); }); });
+  renderEx();
+}
+function renderEx() {
+  Array.prototype.forEach.call(document.querySelectorAll("#ex-tabs button"), function (b) { b.setAttribute("aria-pressed", b.dataset.t === EX.tab ? "true" : "false"); });
+  var body = $("#ex-body"), t = EX.tab;
+  if (t === "amylase" || t === "trypsin" || t === "bile" || t === "lipase") {
+    var rows, tests, intro;
+    if (t === "amylase") { rows = D.amylase.map(function (r) { return { id: r[0], what: r[1], temp: r[2], tests: [["Lugol's (IKI)", r[4], r[3]], ["Benedict's", r[6], r[5]]], why: r[7] }; }); intro = "IKI (+) means starch is still there. Benedict's (+) means maltose was made. Digestion = IKI (-) and Benedict's (+)."; }
+    if (t === "trypsin") { rows = D.trypsin.map(function (r) { return { id: r[0], what: r[1], temp: r[2], tests: [["BAPNA hydrolyzed", r[4], r[3]]], why: r[5] }; }); intro = "Trypsin cleaves BAPNA and releases a yellow dye. Clear to yellow = protein digestion."; }
+    if (t === "bile") { rows = D.bile.map(function (r) { return { id: r[0], what: r[1], temp: "Room temp", tests: [["Emulsified", r[3], r[2]]], why: r[0] === "1E" ? "Control: without bile, oil and water separate." : "Bile salts break the oil into tiny suspended droplets." }; }); intro = "Bile is not an enzyme. It physically breaks fat into droplets."; }
+    if (t === "lipase") { rows = D.lipase.map(function (r) { return { id: r[0], what: r[1], temp: r[2], tests: [["Fat digested", r[4], r[3]]], why: r[5] }; }); intro = "Lipase makes fatty acids, the pH drops, and litmus turns from blue to pink."; }
+    body.innerHTML = '<p class="small" style="margin-top:0">' + esc(intro) + '</p><div class="tubes">' + rows.map(function (r, ri) {
+      return '<div class="panel tube" data-r="' + ri + '"><div class="tsvg">' + tubeSVG("#e9e6f0") + "</div><div><h4>" + esc(r.id) + '</h4><div class="what">' + esc(r.what) + '</div><div class="temp">' + esc(r.temp) + "</div>" +
+        r.tests.map(function (ts, ti) { return '<div class="pm" data-t="' + ti + '"><span class="lab">' + esc(ts[0]) + '</span><button data-v="+" aria-pressed="false">+</button><button data-v="-" aria-pressed="false">&minus;</button></div>'; }).join("") +
+        '<div class="why" hidden></div></div></div>';
+    }).join("") + '</div><div class="row" style="margin-top:14px"><button class="btn primary" id="ex-check">Check all</button><button class="btn" id="ex-reset">Reset</button><span class="small" id="ex-score"></span></div>';
+    Array.prototype.forEach.call(body.querySelectorAll(".pm button"), function (b) {
+      b.addEventListener("click", function () { if (b.parentNode.dataset.locked) return; Array.prototype.forEach.call(b.parentNode.querySelectorAll("button"), function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); }); });
+    });
+    $("#ex-reset").addEventListener("click", renderEx);
+    $("#ex-check").addEventListener("click", function () {
+      var right = 0, n = 0;
+      rows.forEach(function (r, ri) {
+        var card = body.querySelector('.tube[data-r="' + ri + '"]'), allok = true, colors = [], answeredAll = true;
+        r.tests.forEach(function (ts, ti) {
+          var pm = card.querySelector('.pm[data-t="' + ti + '"]'); pm.dataset.locked = "1";
+          var sel = pm.querySelector('button[aria-pressed="true"]'), v = sel ? sel.dataset.v : null, ok = v === ts[1];
+          if (!sel) answeredAll = false;
+          n++; if (ok) right++; else allok = false;
+          Array.prototype.forEach.call(pm.querySelectorAll("button"), function (x) { x.setAttribute("aria-pressed", "false"); if (x.dataset.v === ts[1]) x.classList.add("right"); else if (x === sel) x.classList.add("wrong"); });
+          colors.push("<b>" + esc(ts[0]) + ":</b> " + esc(ts[2]) + " (" + ts[1] + ")");
+        });
+        var c = r.tests[r.tests.length - 1][2]; if (t === "amylase") c = r.tests[0][2];
+        card.querySelector(".tsvg").innerHTML = t === "bile" ? tubeSVG(r.id === "2E" ? "#f6e8a8" : "#cfe3f7") : tubeSVG(tubeColor(c));
+        var w = card.querySelector(".why"); w.hidden = false; w.innerHTML = colors.join("<br>") + "<br>" + esc(r.why);
+        if (answeredAll) mark("tube:" + t + ":" + r.id, allok, { kind: "tube", label: "Tube " + r.id + " (" + r.what + ", " + r.temp + ")", ans: r.tests.map(function (ts) { return ts[0] + " " + ts[1] + ": " + ts[2]; }).join("; ") + ". " + r.why });
+      });
+      $("#ex-score").textContent = right + " of " + n + " right";
+      this.disabled = true;
+    });
+  } else if (t === "vars") {
+    body.innerHTML = '<p class="small" style="margin-top:0">Tap a shaded cell to reveal it. Quiz wording: the dependent variable for amylase is BOTH color tests; constants never include temperature or color.</p><div class="panel tablebox"><table class="vt"><tr><th>Experiment</th><th>Independent</th><th>Dependent</th><th>Kept constant</th><th>Controls</th></tr>' +
+      D.vars.map(function (v) { return "<tr><td><b>" + esc(v[0]) + "</b></td>" + v.slice(1).map(function (c) { return '<td class="hide-cell">' + esc(c) + "</td>"; }).join("") + "</tr>"; }).join("") + "</table></div>";
+    hookHide(body);
+  } else if (t === "enz") {
+    body.innerHTML = '<p class="small" style="margin-top:0">Tap a shaded cell to reveal it.</p><div class="panel tablebox"><table class="vt"><tr><th>Enzyme</th><th>Source</th><th>Substrate</th><th>End product</th><th>Test</th><th>Positive result</th><th>Optimum</th></tr>' +
+      D.enzymes.map(function (v) { return "<tr><td><b>" + esc(v[0]) + "</b></td>" + v.slice(1).map(function (c) { return '<td class="hide-cell">' + esc(c) + "</td>"; }).join("") + "</tr>"; }).join("") + "</table></div>";
+    hookHide(body);
+  } else {
+    body.innerHTML = '<div class="cards">' + SHORT.map(function (s) { return '<details class="feat"><summary>' + esc(s[0]) + "</summary><dl><dd>" + esc(s[1]) + "</dd></dl></details>"; }).join("") + "</div>";
+  }
+}
+function hookHide(root) { Array.prototype.forEach.call(root.querySelectorAll(".hide-cell"), function (c) { c.addEventListener("click", function () { c.classList.add("shown"); }); }); }
+
+/* =========================================================
+   QUIZ BANK
+   ========================================================= */
+var MULTI = { 67: [2, 3, 4, 5], 70: [2, 3] };
+var QZ = { set: "real", order: [], pos: 0, right: 0, done: 0 };
+function qItems(set) {
+  var a = [];
+  if (set !== "new") D.quiz.forEach(function (q, i) { a.push(["r", i]); });
+  if (set !== "real") D.mcq.forEach(function (q, i) { a.push(["n", i]); });
+  return a;
+}
+function startQuiz(set) { QZ.set = set; QZ.order = set === "real" ? qItems(set) : shuffle(qItems(set)); QZ.pos = 0; QZ.right = 0; QZ.done = 0; }
+function viewQuiz() {
+  if (!QZ.order.length) startQuiz("real");
+  main.innerHTML = '<div class="view-head"><div><div class="eyebrow">Multiple choice source</div><h2>Quiz bank</h2>' +
+    "<p>Your 71 real pre- and post-lab questions (a stated source of exam multiple choice) plus 44 new ones with explanations.</p></div>" +
+    '<div class="seg" role="group" aria-label="Question set"><button data-s="real">Your quizzes</button><button data-s="new">New</button><button data-s="all">All shuffled</button></div></div>' +
+    '<div class="panel qcard" id="qcard"></div>';
+  Array.prototype.forEach.call(document.querySelectorAll("[data-s]"), function (b) {
+    b.setAttribute("aria-pressed", b.dataset.s === QZ.set ? "true" : "false");
+    b.addEventListener("click", function () { startQuiz(b.dataset.s); viewQuiz(); });
+  });
+  renderQ();
+}
+function renderQ() {
+  var card = $("#qcard");
+  if (QZ.pos >= QZ.order.length) {
+    card.innerHTML = '<div class="eyebrow">Set complete</div><div class="qtext">' + QZ.right + " of " + QZ.done + ' right</div><button class="btn primary" id="qa">Go again</button>';
+    $("#qa").addEventListener("click", function () { startQuiz(QZ.set); viewQuiz(); }); return;
+  }
+  var it = QZ.order[QZ.pos], src, q, choices, ans, expl = "", img = null, multi = null, id;
+  if (it[0] === "r") {
+    var r = D.quiz[it[1]]; src = r.src; q = r.q; choices = r.choices; ans = r.a; img = r.img; id = "quiz:r" + it[1];
+    if (MULTI[it[1]]) multi = MULTI[it[1]];
+    else if (choices.length && choices.indexOf(ans) < 0) choices = [];
+  } else {
+    var m = D.mcq[it[1]]; src = "New practice question"; q = m.q; choices = m.c; ans = m.c["ABCD".indexOf(m.a)]; expl = m.e; id = "quiz:n" + it[1];
+  }
+  var head = '<div class="row" style="justify-content:space-between"><span class="src">' + esc(src) + '</span><span class="small">' + (QZ.pos + 1) + " / " + QZ.order.length + "</span></div>" +
+    '<div class="qtext">' + esc(q) + "</div>" + (img ? '<img src="' + img + '" alt="Quiz figure">' : "");
+  var next = function (fb) { var nb = document.createElement("button"); nb.className = "btn primary"; nb.textContent = "Next question"; nb.style.marginTop = "10px"; nb.style.display = "block"; nb.addEventListener("click", function () { QZ.pos++; renderQ(); }); fb.appendChild(nb); };
+  var info = { kind: "quiz", label: q, ans: ans + (expl ? " " + expl : "") };
+  if (multi) {
+    card.innerHTML = head + '<p class="small">Select all that apply.</p><div class="choices">' + choices.map(function (c, i) { return '<label class="choice" style="display:flex;gap:8px"><input type="checkbox" value="' + i + '">' + esc(c) + "</label>"; }).join("") + '</div><button class="btn primary" id="qm" style="margin-top:10px">Check</button><div id="qfb" style="margin-top:10px"></div>';
+    $("#qm").addEventListener("click", function () {
+      this.disabled = true;
+      var sel = Array.prototype.map.call(card.querySelectorAll("input:checked"), function (x) { return +x.value; }).sort().join(",");
+      var ok = sel === multi.slice().sort().join(",");
+      Array.prototype.forEach.call(card.querySelectorAll("label.choice"), function (l, i) { if (multi.indexOf(i) >= 0) l.classList.add("right"); else if (l.querySelector("input").checked) l.classList.add("wrong"); });
+      QZ.done++; if (ok) QZ.right++; mark(id, ok, info);
+      var fb = $("#qfb"); fb.className = "fb " + (ok ? "ok" : "no"); fb.innerHTML = ok ? "Right." : "Correct set: <b>" + esc(ans) + "</b>"; next(fb);
+    });
+  } else if (choices.length) {
+    card.innerHTML = head + '<div class="choices">' + choices.map(function (c, i) { return '<button class="choice" data-i="' + i + '">' + esc(c) + "</button>"; }).join("") + '</div><div id="qfb" style="margin-top:10px"></div>';
+    Array.prototype.forEach.call(card.querySelectorAll(".choice"), function (b) {
+      b.addEventListener("click", function () {
+        var ok = choices[+b.dataset.i] === ans;
+        Array.prototype.forEach.call(card.querySelectorAll(".choice"), function (x) { x.disabled = true; if (choices[+x.dataset.i] === ans) x.classList.add("right"); });
+        if (!ok) b.classList.add("wrong");
+        QZ.done++; if (ok) QZ.right++; mark(id, ok, info);
+        var fb = $("#qfb"); fb.className = "fb " + (ok ? "ok" : "no");
+        fb.innerHTML = (ok ? "Right. " : "Answer: <b>" + esc(ans) + "</b>. ") + (expl ? "<span style='color:var(--ink)'>" + esc(expl) + "</span>" : ""); next(fb);
+      });
+    });
+  } else {
+    card.innerHTML = head + '<p class="small">Answer it in your head (or out loud), then reveal.</p><button class="btn primary" id="qr">Reveal answer</button><div id="qfb"></div>';
+    $("#qr").addEventListener("click", function () {
+      this.remove();
+      var fb = $("#qfb"); fb.innerHTML = '<div class="reveal">' + esc(ans) + '</div><div class="row" style="margin-top:10px"><button class="btn" id="qy">I had it</button><button class="btn" id="qn">I missed it</button></div>';
+      var go = function (ok) { QZ.done++; if (ok) QZ.right++; mark(id, ok, info); QZ.pos++; renderQ(); };
+      $("#qy").addEventListener("click", function () { go(true); }); $("#qn").addEventListener("click", function () { go(false); });
+    });
+  }
+}
+
+/* =========================================================
+   FLASHCARDS
+   ========================================================= */
+var CARDIAC = [
+  ["Systole vs diastole", "Systole = contraction, diastole = relaxation. Plain 'systole' means ventricular contraction."],
+  ["What opens and closes heart valves?", "Pressure differences. Valves are passive."],
+  ["Ventricular filling (mid-to-late diastole)", "AV valves open, semilunar valves closed. Atrial systole tops off the ventricles."],
+  ["Isovolumetric contraction", "All valves closed; ventricular pressure rising."],
+  ["Ventricular ejection", "Semilunar valves open, AV valves closed."],
+  ["Isovolumetric relaxation", "All valves closed (early diastole)."],
+  ["First heart sound, 'lub'", "AV (mitral, tricuspid) valves close as the ventricles begin to contract. Longer and louder."],
+  ["Second heart sound, 'dup'", "Semilunar (aortic, pulmonary) valves close at the start of ventricular relaxation."],
+  ["Heart rate 73 bpm: lubs and dubs?", "73 lub and 73 dub."],
+  ["Heart murmur", "Abnormal sound from turbulent flow: a leaky (insufficient) or narrowed (stenotic) valve."],
+  ["Auscultation sites", "Aortic: 2nd ICS right sternal margin. Pulmonary: 2nd ICS left. Tricuspid: 5th ICS at the sternal margin. Mitral: 5th ICS left midclavicular line (apex)."],
+  ["Pulse points", "Temporal, facial, common carotid, brachial, radial, femoral, popliteal, posterior tibial, dorsalis pedis. The quiz keyed ulnar as NOT a pulse point."],
+  ["Boyle's law", "Pressure and volume are inversely related. Thoracic volume up, pressure down, air flows in."],
+  ["Quiet expiration", "Passive: muscles relax and the lungs recoil. No muscles are active."],
+  ["Bronchial vs vesicular sounds", "Bronchial: over trachea and large bronchi, loud and tubular. Vesicular: over lung periphery, soft and rustling."],
+  ["Hyperventilation", "Blows off CO2: CO2 falls, pH rises (respiratory alkalosis)."],
+  ["Hypoventilation", "CO2 builds up, carbonic acid rises, pH falls (respiratory acidosis)."],
+  ["Clinical significance of vital capacity", "Reduced VC is a hallmark of decreased lung compliance (stiff lungs): restrictive disease, fibrosis, weak muscles. Obstructive disease mainly slows exhalation and traps air."],
+  ["Spirometry formulas", "MRV = TV x breaths/min. IRV = VC - (TV + ERV). Predicted VC (male, L) = 0.052H - 0.022A - 3.60. RV = VC x age factor (16-34: 0.250, 35-49: 0.305, 50-69: 0.445)."]
+];
+var DECKS = [
+  ["resp", "Respiratory functions", function () { return D.respFunc; }],
+  ["dig", "Digestive functions", function () { return D.digFunc; }],
+  ["musc", "Breathing muscles", function () { return D.muscles.map(function (m) { return [m[0], m[1] + ". " + m[2] + "."]; }); }],
+  ["vol", "Volumes and capacities", function () { return D.volumes.map(function (v) { return [v[0] + " (" + v[1] + ")", v[2] + ". Male " + v[3] + ", female " + v[4] + (v[5] ? ". " + v[5] : "")]; }); }],
+  ["phys", "Physiology and heart", function () { return CARDIAC; }],
+  ["histo", "Histology features", function () { return D.histo.map(function (h) { return [h[0], h[3]]; }); }],
+  ["ex39", "Ex 39 short answers", function () { return SHORT; }],
+  ["order", "Put in order", null]
+];
+var FC = { deck: "resp", order: [], pos: 0, open: false };
+function startDeck(k) { FC.deck = k; var d = deckData(k); FC.order = d ? shuffle(d.map(function (x, i) { return i; })) : []; FC.pos = 0; FC.open = false; }
+function deckData(k) { for (var i = 0; i < DECKS.length; i++) if (DECKS[i][0] === k) return DECKS[i][2] ? DECKS[i][2]() : null; return null; }
+function deckName(k) { for (var i = 0; i < DECKS.length; i++) if (DECKS[i][0] === k) return DECKS[i][1]; return k; }
+function viewCards() {
+  if (!FC.order.length && FC.deck !== "order") startDeck(FC.deck);
+  main.innerHTML = '<div class="view-head"><div><div class="eyebrow">Recall</div><h2>Flashcards</h2><p>Say the answer, tap the card to check, then mark it. Cards you miss go to Review.</p></div></div>' +
+    '<div class="deck-list" id="decks">' + DECKS.map(function (d) { return '<button data-d="' + d[0] + '">' + esc(d[1]) + "</button>"; }).join("") + '</div><div id="fc"></div>';
+  Array.prototype.forEach.call(document.querySelectorAll("#decks button"), function (b) {
+    b.setAttribute("aria-pressed", b.dataset.d === FC.deck ? "true" : "false");
+    b.addEventListener("click", function () { startDeck(b.dataset.d); viewCards(); });
+  });
+  if (FC.deck === "order") renderOrder(); else renderCard();
+}
+function renderCard() {
+  var d = deckData(FC.deck), box = $("#fc");
+  if (FC.pos >= FC.order.length) { box.innerHTML = '<div class="panel flash" style="cursor:default"><div class="front">Deck done</div><div class="row"><button class="btn primary" id="fa">Shuffle and repeat</button></div></div>'; $("#fa").addEventListener("click", function () { startDeck(FC.deck); renderCard(); }); return; }
+  var c = d[FC.order[FC.pos]];
+  box.innerHTML = '<div class="panel flash" id="flash" role="button" tabindex="0" aria-label="Flip card"><div class="small">' + (FC.pos + 1) + " / " + FC.order.length + " · " + esc(deckName(FC.deck)) + '</div><div class="front">' + esc(c[0]) + "</div>" +
+    (FC.open ? '<div class="back">' + esc(c[1]) + "</div>" : '<div class="small">Tap to reveal</div>') + "</div>" +
+    (FC.open ? '<div class="row" style="margin-top:12px"><button class="btn primary" id="fy">Knew it</button><button class="btn" id="fn">Missed it</button></div>' : "");
+  var flip = function () { if (!FC.open) { FC.open = true; renderCard(); } };
+  $("#flash").addEventListener("click", flip);
+  $("#flash").addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+  if (FC.open) {
+    var go = function (ok) { mark("card:" + FC.deck + ":" + c[0], ok, { kind: "card", label: c[0], ans: c[1] }); FC.pos++; FC.open = false; renderCard(); };
+    $("#fy").addEventListener("click", function () { go(true); }); $("#fn").addEventListener("click", function () { go(false); });
+  }
+}
+var ORDERS = [["Airflow in: nose to alveoli", "airIn"], ["Food: mouth to anus", "food"], ["Bile: liver to duodenum", "bileFlow"]];
+var OR = { k: 0, placed: [], pool: [] };
+function renderOrder() {
+  var box = $("#fc"), seq = D[ORDERS[OR.k][1]];
+  if (!OR.pool.length && !OR.placed.length) OR.pool = shuffle(seq.map(function (s, i) { return i; }));
+  box.innerHTML = '<div class="deck-list">' + ORDERS.map(function (o, i) { return '<button data-k="' + i + '" aria-pressed="' + (i === OR.k) + '">' + esc(o[0]) + "</button>"; }).join("") + "</div>" +
+    '<div class="panel" style="padding:16px"><div class="eyebrow">Tap the stops in order</div><div class="chain" id="placed" style="margin:10px 0 14px">' +
+    OR.placed.map(function (p, i) { return '<span class="slot ' + (p === i ? "ok" : "no") + '">' + (i + 1) + ". " + esc(seq[p]) + "</span>"; }).join("") + "</div>" +
+    '<div class="chain" id="pool">' + OR.pool.map(function (p) { return '<button data-p="' + p + '">' + esc(seq[p]) + "</button>"; }).join("") + "</div>" +
+    (OR.pool.length ? "" : '<div class="fb ' + (OR.placed.every(function (p, i) { return p === i; }) ? "ok" : "no") + '" style="margin-top:12px">' + OR.placed.filter(function (p, i) { return p === i; }).length + " of " + seq.length + " in the right spot.</div>") +
+    '<div class="row" style="margin-top:12px"><button class="btn" id="or-reset">Start over</button><button class="btn ghost" id="or-show">Show correct order</button></div></div>';
+  Array.prototype.forEach.call(box.querySelectorAll("[data-k]"), function (b) { b.addEventListener("click", function () { OR.k = +b.dataset.k; OR.placed = []; OR.pool = []; renderOrder(); }); });
+  Array.prototype.forEach.call(box.querySelectorAll("#pool button"), function (b) {
+    b.addEventListener("click", function () { var p = +b.dataset.p; OR.pool.splice(OR.pool.indexOf(p), 1); OR.placed.push(p);
+      if (!OR.pool.length) { var ok = OR.placed.every(function (q, i) { return q === i; }); mark("order:" + OR.k, ok, { kind: "order", label: ORDERS[OR.k][0], ans: seq.join(" > ") }); }
+      renderOrder(); });
+  });
+  $("#or-reset").addEventListener("click", function () { OR.placed = []; OR.pool = []; renderOrder(); });
+  $("#or-show").addEventListener("click", function () { OR.placed = seq.map(function (s, i) { return i; }); OR.pool = []; renderOrder(); });
+}
+
+/* =========================================================
+   REVIEW
+   ========================================================= */
+var RV = { confirm: false };
+function viewReview() {
+  var ids = Object.keys(missed).sort(function (a, b) { return (missed[b].t || 0) - (missed[a].t || 0); });
+  var pinItems = ids.filter(function (k) { return missed[k].kind === "pin"; });
+  main.innerHTML = '<div class="view-head"><div><div class="eyebrow">Your weak spots</div><h2>Review missed</h2><p>Everything you miss lands here. Get an item right twice in a row and it drops off. Saved in this browser only.</p></div>' +
+    '<div class="row">' + (pinItems.length ? '<button class="btn primary" id="rv-drill">Drill missed pins (' + pinItems.length + ")</button>" : "") +
+    (ids.length ? (RV.confirm ? '<span class="small">Clear all?</span><button class="btn" id="rv-yes">Yes, clear</button><button class="btn ghost" id="rv-no">Cancel</button>' : '<button class="btn ghost" id="rv-clear">Clear list</button>') : "") + "</div></div>" +
+    (ids.length ? '<div class="miss">' + ids.map(function (k) {
+      var m = missed[k];
+      return '<div class="panel it"><div style="min-width:0"><div class="k">' + esc(m.kind) + '</div><div style="font-weight:700">' + esc(m.label || k) + '</div><div class="small" style="color:var(--ink)">' + esc(m.ans || "") + "</div></div>" +
+        (m.kind === "pin" ? '<button class="btn" data-go="' + esc(k) + '">Retry</button>' : "") + "</div>";
+    }).join("") + "</div>" : '<div class="panel empty">Nothing to review yet. Missed pins, cards, tubes and questions will show up here.</div>');
+  var dr = $("#rv-drill");
+  if (dr) dr.addEventListener("click", function () { FS.drill = shuffle(pinItems.map(function (k) { return [missed[k].fig, missed[k].pin]; })); FS.pos = 0; FS.results = {}; if (FS.mode === "study") FS.mode = "choose"; location.hash = "figures"; });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-go]"), function (b) {
+    b.addEventListener("click", function () { var m = missed[b.dataset.go]; startFig(m.fig, m.pin); if (FS.mode === "study") FS.mode = "choose"; location.hash = "figures"; });
+  });
+  var c = $("#rv-clear"); if (c) c.addEventListener("click", function () { RV.confirm = true; viewReview(); });
+  var y = $("#rv-yes"); if (y) y.addEventListener("click", function () { missed = {}; saveMissed(); RV.confirm = false; viewReview(); });
+  var n = $("#rv-no"); if (n) n.addEventListener("click", function () { RV.confirm = false; viewReview(); });
+}
+
+/* ---------- boot ---------- */
+updateStats();
+if (!location.hash) { var last = null; try { last = localStorage.getItem("labex2-view"); } catch (e) {} if (last && VIEWS[last]) { location.hash = last; } }
+route();
+})();
+</script>
+
+</body>
+</html>
