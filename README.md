@@ -6,7 +6,7 @@ Open `index.html` in a browser. Sections:
 
 - **Figures:** every posted practice figure with numbered pins. Choose, Type, or Study mode; tag-list-only toggle; mixed drill across all figures.
 - **Histology:** microscope-station drill, look-alike pairs, tissue cards, labeled slides.
-- **Ex 39 experiment:** predict + or - for every tube (expected textbook results), variables, enzyme table, short answers.
+- **Ex 39 experiment:** How it works (plain-language walkthrough of every activity, indicator, variable and quiz trap), the 8 post-lab quiz questions with explanations, predict + or - for every tube (expected textbook results), variables, enzyme table, short answers.
 - **Quiz bank:** pre- and post-lab quiz questions plus new practice questions.
 - **Flashcards:** functions, breathing muscles, volumes and capacities, physiology, histology, and put-in-order pathways.
 - **Review missed:** items you miss are saved in your browser until you get them right twice.
